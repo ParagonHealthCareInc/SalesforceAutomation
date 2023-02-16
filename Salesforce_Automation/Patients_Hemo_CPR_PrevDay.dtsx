@@ -1,0 +1,2527 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/29/2020 4:03:28 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SVRREPORTING01"
+  DTS:CreatorName="PHI\admin.ron"
+  DTS:DTSID="{A7632B32-126B-4FE4-B68E-634E053BCA82}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Patients_Hemo_CPR_PrevDay"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="23"
+  DTS:VersionGUID="{5A67A8B4-FAFE-450B-8664-99FA32FD7B86}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{6DEBABD6-7070-4C58-B187-D86F79D21E9F}"
+      DTS:ObjectName="CLUSTERPHI\PHI.Salesforce">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=CLUSTERPHI\PHI;Initial Catalog=Salesforce;Integrated Security=True;Application Name=SSIS-Prescribers_CPR_30Min-{6DEBABD6-7070-4C58-B187-D86F79D21E9F}CLUSTERPHI\PHI.Salesforce;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CPRDB\CPR.CPR7]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{BB4FF61D-5220-41B8-AA07-4E3BDE1E5B00}"
+      DTS:ObjectName="CPRDB\CPR.CPR7">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=CPRDB\CPR;Initial Catalog=CPR7;Integrated Security=True;Application Name=SSIS-Prescribers_CPR_30Min-{BB4FF61D-5220-41B8-AA07-4E3BDE1E5B00}CPRDB\CPR.CPR7;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Salesforce Connection Manager]"
+      DTS:CreationName="Salesforce (KingswaySoft)"
+      DTS:DTSID="{D86FB89A-D4CD-42E3-BEBA-830C2239E96A}"
+      DTS:ObjectName="Salesforce Connection Manager">
+      <DTS:ObjectData>
+        <SalesforceConnectionManager
+          ConnectionString="InstanceType=Production;AuthenticationType=AuthorizationCode;ServiceEndpoint=SOAP;ServiceUrl=https://login.salesforce.com/services/Soap/u/50.0;RedirectUri=;UserName=postmaster@paragonhealthcare.com;ServiceTimeout=120;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;ProxyUsername=;RetryOnIntermittentErrors=True">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="ItZUcKQ+SA=="
+            IV="y3lvEAD9z+Q=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>y3lvEAD9z+R3ejcQB274GRwrLMaVVTXptvO2o6ESKizw9E9d512yTWsQwBQOOCRRGL9ss5YsaHOQUl5G+KZRqiGp8bdE2ipyZ4/R0swOJZc5fNklMlbPiRPblJiKYnrH</CipherValue>
+            </CipherData>
+          </EncryptedData>
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="zqYHChVTgw=="
+            IV="CjPf9wvYSa0=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>CjPf9wvYSa1ytCHngrlrGXlS5V7E/im6UFiNGh+3VB8bAU20USI/4+46jlkU+MsATC/FZm3BYkyDMHGK5wotvEghhraMTvAauiBmQBCtCl1LUVAZ6gznaXLHccyCIwD2izLlW1zd5/9IVIrhpCoFRU5Dp9k6wUbA</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </SalesforceConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CB0D11A9-9878-4A14-B8C2-04A3CB2B8E46}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\ADO NET Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="ADO NET Destination"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."PatientErrorLog"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\ADO NET Destination.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+                  connectionManagerRefId="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="IgnoreFailure"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[MRN__c]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="MRN__c"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[MRN__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[MRN__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="51"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[MRN__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="MRN__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Address__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Address__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Address_Line_2__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Address_Line_2__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[City__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="City__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[State__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="State__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Zip__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Zip__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Phone__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Phone__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[DOB__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="DOB__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Sex__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sex__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Status__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Prescriber__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Therapy__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Therapy__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Last_Referral_Date__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Last_Referral_Date__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Secondary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sales_Rep_HIT__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sales_Rep_Spec__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Sales_Rep_Hemo__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sales_Rep_Hemo__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Original_Sales_Rep__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Paragon_Site__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[EMR_System__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="EMR_System__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="wstr"
+                      length="255"
+                      name="ErrorColumn" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[ErrorMessage]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="ErrorMessage" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Destination.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\ADO NET Destination 1"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="ADO NET Destination 1"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."PatientErrorLog"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\ADO NET Destination 1.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+                  connectionManagerRefId="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="IgnoreFailure"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[ErrorCode]"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[ErrorColumn]"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].Columns[ErrorMessage]"
+                      cachedDataType="wstr"
+                      cachedLength="2048"
+                      cachedName="ErrorMessage"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[ErrorMessage]"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].Columns[MRN__c]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="MRN__c"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[MRN__c]"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[MRN__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="51"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Name]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[MRN__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="MRN__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Address__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Address__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Address_Line_2__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Address_Line_2__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[City__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="City__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[State__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="State__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Zip__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Zip__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Phone__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Phone__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[DOB__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="DOB__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Sex__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sex__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Status__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Prescriber__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Therapy__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Therapy__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Last_Referral_Date__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Last_Referral_Date__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Secondary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sales_Rep_HIT__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sales_Rep_Spec__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Sales_Rep_Hemo__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Sales_Rep_Hemo__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Original_Sales_Rep__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Paragon_Site__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[EMR_System__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="EMR_System__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="wstr"
+                      length="255"
+                      name="ErrorColumn" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[ErrorMessage]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="ErrorMessage" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\ADO NET Destination 1.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Destination 1.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Destination 1.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Destination 1.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">Declare @start datetime;
+Declare @end datetime;
+
+--Previous Day Automation
+SET @start = DATEADD(DAY, DATEDIFF(DAY, 1, GETDATE()), 0);
+SET @end = DATEADD(DAY, DATEDIFF(DAY, 0, GETDATE()), 0);
+
+declare @insComp table([NO] int, [ORG] varchar(50))
+INSERT INTO @insComp
+	SELECT NO, ORG FROM INSCOMP
+
+declare @SalesReps table(SalesRep varchar(50), SalesCode varchar(5), New_Rep varchar(50), Division varchar(10))
+INSERT INTO @SalesReps
+	SELECT
+		SalesRep
+	   ,SalesCode
+	   ,New_Rep
+	   ,Division
+	FROM [clusterphi\phi].[EmployeePortal].[dbo].SalesReps s
+	WHERE s.Active = 1
+
+SELECT
+	LTRIM(RTRIM(p.patient_sys_id)) AS MRN__c
+   ,UPPER(CONCAT(LTRIM(RTRIM(p.patient_first_name)), ' ', LTRIM(RTRIM(p.patient_last_name)))) AS [Name]
+   ,LTRIM(RTRIM(p.patient_address)) AS Address__c
+   ,LTRIM(RTRIM(p.patient_city)) AS City__c
+   ,LTRIM(RTRIM(p.patient_state)) AS State__c
+   ,SUBSTRING(LTRIM(RTRIM(p.patient_zip)), PATINDEX('%[0-9]%', LTRIM(RTRIM(p.patient_zip))), 5) AS Zip__c
+   ,LTRIM(RTRIM(p.patient_primary_phone)) AS Phone__c
+   ,LTRIM(RTRIM(p.patient_cell_phone)) AS Cell_Phone__c
+   ,LTRIM(RTRIM(p.patient_work_phone)) AS Work_Phone__c
+   ,CASE
+		WHEN FORMAT(p.patient_date_of_birth, 'yyyy-MM-dd', 'en-US') IS NULL
+			THEN ''
+		ELSE FORMAT(p.patient_date_of_birth, 'yyyy-MM-dd', 'en-US')
+	END AS DOB__c
+   ,CASE
+		WHEN LTRIM(RTRIM(p.patient_gender)) IS NULL
+			THEN ''
+		ELSE LTRIM(RTRIM(p.patient_gender))
+	END AS Sex__c
+   ,LTRIM(RTRIM(p.patient_status)) AS Status__c
+   ,CASE
+		WHEN LTRIM(RTRIM(p.patient_primary_physician_sys_id)) IS NULL
+			THEN '9999999999'
+		WHEN LTRIM(RTRIM(p.patient_primary_physician_sys_id)) = ''
+			THEN '9999999999'
+		ELSE (SELECT
+					CASE
+						WHEN LTRIM(RTRIM(d.PH_NPI)) IS NULL
+							THEN '9999999999'
+						WHEN LTRIM(RTRIM(d.PH_NPI)) = ''
+							THEN '9999999999'
+						ELSE LTRIM(RTRIM(d.PH_NPI))
+					END
+				FROM DOCTORS d
+				WHERE p.patient_primary_physician_sys_id = d.NO)
+	END AS Prescriber__c
+   ,CASE
+		WHEN LEN(LTRIM(RTRIM(p.patient_insurance_coordinator))) = 0
+			THEN 'N/A'
+		WHEN SUBSTRING(p.patient_insurance_coordinator, 1, 1) = '.'
+			THEN LTRIM(RTRIM(SUBSTRING(p.patient_insurance_coordinator, CHARINDEX('.', p.patient_insurance_coordinator) + 1, LEN(p.patient_insurance_coordinator))))
+		ELSE p.patient_insurance_coordinator
+	END AS Therapy__c
+   ,FORMAT(p.patient_referral_date, 'yyyy-MM-dd', 'en-US') AS Last_Referral_Date__c
+   ,(SELECT
+			i.ORG
+		FROM @insComp i
+		WHERE i.NO = p.patient_primary_insurance_sys_id)
+	AS Primary_Insurance__c
+   ,(SELECT
+			i.ORG
+		FROM @insComp i
+		WHERE i.NO = p.patient_secondary_insurance_sys_id)
+	AS Secondary_Insurance__c
+   ,(SELECT
+			New_Rep
+		FROM @SalesReps s
+		WHERE s.SalesCode = h.SalesCode
+		AND s.Division = 'HIT')
+	AS [Sales_Rep_HIT__c]
+   ,(SELECT
+			New_Rep
+		FROM @SalesReps s
+		WHERE s.SalesCode = h.SalesCode
+		AND SUBSTRING(s.SalesCode, 1, 1) = 'B')
+	AS [Sales_Rep_Spec__c]
+   ,p.patient_sales_rep AS [Original_Sales_Rep__c]
+   ,h.SalesCode
+   ,LTRIM(RTRIM(p.patient_sitename)) AS 'Paragon_Site__c'
+   ,p.patient_referral_organization AS [Referral_Organization__c]
+   ,p.patient_primary_ancillary_agency AS [Primary_Ancillary_Agency__c]
+   ,p.patient_hospital AS [Patient_Hospital__c]
+FROM rpbi.vw_patient p (NOLOCK)
+LEFT JOIN hr h (NOLOCK)
+	ON p.patient_sys_id = h.MRN
+		AND h.MRN &lt;&gt; 'CASH'
+WHERE h.TOUCHDATE &gt;= @start
+AND h.TOUCHDATE &lt;= @end</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">30</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CPRDB\CPR.CPR7]"
+                  connectionManagerRefId="Package.ConnectionManagers[CPRDB\CPR.CPR7]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[MRN__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[MRN__c]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[MRN__c]"
+                      name="MRN__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Name]"
+                      length="51"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Address__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Address__c]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Address__c]"
+                      name="Address__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[City__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[City__c]"
+                      length="20"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[City__c]"
+                      name="City__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[State__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[State__c]"
+                      length="2"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[State__c]"
+                      name="State__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Zip__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Zip__c]"
+                      length="5"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Zip__c]"
+                      name="Zip__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Phone__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Phone__c]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Phone__c]"
+                      name="Phone__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Cell_Phone__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Cell_Phone__c]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Cell_Phone__c]"
+                      name="Cell_Phone__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Work_Phone__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Work_Phone__c]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Work_Phone__c]"
+                      name="Work_Phone__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DOB__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DOB__c]"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DOB__c]"
+                      name="DOB__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sex__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Sex__c]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sex__c]"
+                      name="Sex__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Status__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Status__c]"
+                      length="9"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Status__c]"
+                      name="Status__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Prescriber__c]"
+                      length="80"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber__c]"
+                      name="Prescriber__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Therapy__c]"
+                      length="22"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Therapy__c]"
+                      name="Therapy__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Last_Referral_Date__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Last_Referral_Date__c]"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Primary_Insurance__c]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Primary_Insurance__c]"
+                      name="Primary_Insurance__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Secondary_Insurance__c]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Secondary_Insurance__c]"
+                      name="Secondary_Insurance__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Sales_Rep_HIT__c]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sales_Rep_HIT__c]"
+                      name="Sales_Rep_HIT__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Sales_Rep_Spec__c]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sales_Rep_Spec__c]"
+                      name="Sales_Rep_Spec__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Original_Sales_Rep__c]"
+                      length="55"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Original_Sales_Rep__c]"
+                      name="Original_Sales_Rep__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesCode]"
+                      length="3"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[SalesCode]"
+                      name="SalesCode"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Paragon_Site__c]"
+                      length="30"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Referral_Organization__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Referral_Organization__c]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Referral_Organization__c]"
+                      name="Referral_Organization__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Primary_Ancillary_Agency__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Primary_Ancillary_Agency__c]"
+                      length="22"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Primary_Ancillary_Agency__c]"
+                      name="Primary_Ancillary_Agency__c"
+                      truncationRowDisposition="RedirectRow" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Patient_Hospital__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="RedirectRow"
+                      externalMetadataColumnId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Patient_Hospital__c]"
+                      length="32"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Patient_Hospital__c]"
+                      name="Patient_Hospital__c"
+                      truncationRowDisposition="RedirectRow" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[MRN__c]"
+                      dataType="wstr"
+                      length="12"
+                      name="MRN__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="51"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Address__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="Address__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[City__c]"
+                      dataType="wstr"
+                      length="20"
+                      name="City__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[State__c]"
+                      dataType="wstr"
+                      length="2"
+                      name="State__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Zip__c]"
+                      dataType="wstr"
+                      length="5"
+                      name="Zip__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      name="Phone__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Cell_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      name="Cell_Phone__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Work_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      name="Work_Phone__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[DOB__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="DOB__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Sex__c]"
+                      dataType="wstr"
+                      length="1"
+                      name="Sex__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="9"
+                      name="Status__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="80"
+                      name="Prescriber__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Therapy__c]"
+                      dataType="wstr"
+                      length="22"
+                      name="Therapy__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Last_Referral_Date__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="Last_Referral_Date__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Primary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Secondary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Sales_Rep_HIT__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Sales_Rep_Spec__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="55"
+                      name="Original_Sales_Rep__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[SalesCode]"
+                      dataType="wstr"
+                      length="3"
+                      name="SalesCode" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="Paragon_Site__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Referral_Organization__c]"
+                      dataType="wstr"
+                      length="100"
+                      name="Referral_Organization__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Primary_Ancillary_Agency__c]"
+                      dataType="wstr"
+                      length="22"
+                      name="Primary_Ancillary_Agency__c" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Patient_Hospital__c]"
+                      dataType="wstr"
+                      length="32"
+                      name="Patient_Hospital__c" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[MRN__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[MRN__c]"
+                      name="MRN__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="51"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Address__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Address__c]"
+                      name="Address__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[City__c]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[City__c]"
+                      name="City__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[State__c]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[State__c]"
+                      name="State__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Zip__c]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Zip__c]"
+                      name="Zip__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Phone__c]"
+                      name="Phone__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Cell_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Cell_Phone__c]"
+                      name="Cell_Phone__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Work_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Work_Phone__c]"
+                      name="Work_Phone__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DOB__c]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[DOB__c]"
+                      name="DOB__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Sex__c]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Sex__c]"
+                      name="Sex__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Status__c]"
+                      dataType="wstr"
+                      length="9"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Status__c]"
+                      name="Status__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Prescriber__c]"
+                      name="Prescriber__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      length="22"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Therapy__c]"
+                      name="Therapy__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Last_Referral_Date__c]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Primary_Insurance__c]"
+                      name="Primary_Insurance__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Secondary_Insurance__c]"
+                      name="Secondary_Insurance__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Sales_Rep_HIT__c]"
+                      name="Sales_Rep_HIT__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Sales_Rep_Spec__c]"
+                      name="Sales_Rep_Spec__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="55"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Original_Sales_Rep__c]"
+                      name="Original_Sales_Rep__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesCode]"
+                      dataType="wstr"
+                      length="3"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[SalesCode]"
+                      name="SalesCode" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Referral_Organization__c]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Referral_Organization__c]"
+                      name="Referral_Organization__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Primary_Ancillary_Agency__c]"
+                      dataType="wstr"
+                      length="22"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Primary_Ancillary_Agency__c]"
+                      name="Primary_Ancillary_Agency__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Patient_Hospital__c]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Patient_Hospital__c]"
+                      name="Patient_Hospital__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Salesforce Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2020 KingswaySoft Inc."
+              description="Populate data into Salesforce."
+              name="Salesforce Destination"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how data is written to Salesforce."
+                  expressionType="Notify"
+                  name="ActionType"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Salesforce.SalesforceDestinationActionType">5</property>
+                <property
+                  dataType="System.String"
+                  description="Destination object to write data."
+                  expressionType="Notify"
+                  name="DestinationObject">Patient__c</property>
+                <property
+                  dataType="System.Int32"
+                  description="Batch size"
+                  expressionType="Notify"
+                  name="BatchSize">5000</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the External ID field to be used for Salesforce upsert action."
+                  expressionType="Notify"
+                  name="UpsertExternalIdField">MRN__c</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether you wan to use Salesforce Bulk API to load data."
+                  expressionType="Notify"
+                  name="UseBulkApi">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Bulk data format to use when Salesforce Bulk API is used."
+                  expressionType="Notify"
+                  name="BulkDataFormat"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.Salesforce.BulkDataFormat">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Bulk data format to use when Salesforce Bulk API is used."
+                  expressionType="Notify"
+                  name="ConcurrencyMode"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Salesforce.ConcurrencyMode">2</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to remove those invalid characters before writing to Salesforce."
+                  expressionType="Notify"
+                  name="RemoveInvalidCharacters">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="When true, datetime values should be sent to Salesforce in UTC format. The default is false, in which case, datetime values will be posted to Salesforce in local system time. "
+                  expressionType="Notify"
+                  name="SendDateTimeInUtcFormat">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to ignore those NULL-valued fields."
+                  expressionType="Notify"
+                  name="IgnoreNullValuedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to send empty strings as NULLs when writing to Salesforce. When disabled, empty strings will not be converted to NULL value, therefore will not be posted to Salesforce. This can be helpful in the case that you want to retain original values in Salesforce when the incoming value is empty (not NULL though). "
+                  expressionType="Notify"
+                  name="SendEmptyStringsAsNullValues">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to write batch files withUTF-8 encoding when using Bulk API to write to Salesforce."
+                  expressionType="Notify"
+                  name="WriteBatchFilesWithUtf8Encoding">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.Salesforce.SalesforceDestinationComponent</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Salesforce Destination.Connections[Salesforce]"
+                  connectionManagerID="Package.ConnectionManagers[Salesforce Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Salesforce Connection Manager]"
+                  description="Salesforce Connection"
+                  name="Salesforce" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="RedirectRow"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Address__c]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Address__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Address__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Address__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[City__c]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="City__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[City__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[City__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[DOB__c]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="DOB__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[DOB__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[DOB__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Last_Referral_Date__c]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="Last_Referral_Date__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Last_Referral_Date__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Last_Referral_Date__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[MRN__c]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="MRN__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[MRN__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[MRN__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="51"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Name]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Original_Sales_Rep__c]"
+                      cachedDataType="wstr"
+                      cachedLength="55"
+                      cachedName="Original_Sales_Rep__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Original_Sales_Rep__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Original_Sales_Rep__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Paragon_Site__c]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Paragon_Site__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Paragon_Site__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Paragon_Site__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Phone__c]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Phone__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Phone__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Phone__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Prescriber__c]"
+                      cachedDataType="wstr"
+                      cachedLength="80"
+                      cachedName="Prescriber__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Prescriber__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Primary_Insurance__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Primary_Insurance__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Primary_Insurance__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Primary_Insurance__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Sales_Rep_HIT__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Sales_Rep_HIT__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_HIT__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sales_Rep_HIT__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Sales_Rep_Spec__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Sales_Rep_Spec__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_Spec__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sales_Rep_Spec__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Secondary_Insurance__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Secondary_Insurance__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Secondary_Insurance__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Secondary_Insurance__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Sex__c]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="Sex__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sex__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Sex__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[State__c]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="State__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[State__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[State__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Status__c]"
+                      cachedDataType="wstr"
+                      cachedLength="9"
+                      cachedName="Status__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Status__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Status__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Therapy__c]"
+                      cachedDataType="wstr"
+                      cachedLength="22"
+                      cachedName="Therapy__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Therapy__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Therapy__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Zip__c]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="Zip__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Zip__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Zip__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Cell_Phone__c]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Cell_Phone__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Cell_Phone__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Cell_Phone__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Patient_Hospital__c]"
+                      cachedDataType="wstr"
+                      cachedLength="32"
+                      cachedName="Patient_Hospital__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Patient_Hospital__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Patient_Hospital__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Primary_Ancillary_Agency__c]"
+                      cachedDataType="wstr"
+                      cachedLength="22"
+                      cachedName="Primary_Ancillary_Agency__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Primary_Ancillary_Agency__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Primary_Ancillary_Agency__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Referral_Organization__c]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="Referral_Organization__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Referral_Organization__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Referral_Organization__c]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Work_Phone__c]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="Work_Phone__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Work_Phone__c]"
+                      lineageId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output].Columns[Work_Phone__c]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Account__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Account__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Account</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Address__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Address__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Address_Line_2__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Address_Line_2__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[City__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="City__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Contact__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Contact__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Contact</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[DOB__c]"
+                      dataType="dbDate"
+                      name="DOB__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Email__c]"
+                      dataType="wstr"
+                      length="80"
+                      name="Email__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[EMR_System__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="EMR_System__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[First_Name__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="First_Name__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      name="Id">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Patient__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Last_Name__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="Last_Name__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Last_Referral_Date__c]"
+                      dataType="dbDate"
+                      name="Last_Referral_Date__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[MRN__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="MRN__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="80"
+                      name="Name">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Original_Sales_Rep__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="Paragon_Site__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Phone__c]"
+                      dataType="wstr"
+                      length="40"
+                      name="Phone__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Prescriber__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Prescriber__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="LookupSettings">&lt;LookupSettings&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;TextLookupSetting&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetObject&gt;Prescriber__c&lt;/TargetObject&gt;
+      &lt;OptOut&gt;false&lt;/OptOut&gt;
+      &lt;TargetTextField&gt;NPI__c&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/TextLookupSetting&gt;
+&lt;/LookupSettings&gt;</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="80"
+                      name="Primary_Insurance__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_Hemo__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Sales_Rep_Hemo__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="LookupSettings">&lt;LookupSettings&gt;
+  &lt;IgnoreCase&gt;true&lt;/IgnoreCase&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;TextLookupSetting&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetObject&gt;User&lt;/TargetObject&gt;
+      &lt;OptOut&gt;false&lt;/OptOut&gt;
+      &lt;TargetTextField&gt;Name&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/TextLookupSetting&gt;
+&lt;/LookupSettings&gt;</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Sales_Rep_HIT__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="LookupSettings">&lt;LookupSettings&gt;
+  &lt;IgnoreCase&gt;true&lt;/IgnoreCase&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;TextLookupSetting&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetObject&gt;User&lt;/TargetObject&gt;
+      &lt;OptOut&gt;false&lt;/OptOut&gt;
+      &lt;TargetTextField&gt;Name&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/TextLookupSetting&gt;
+&lt;/LookupSettings&gt;</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_IVC__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Sales_Rep_IVC__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Sales_Rep_Spec__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="LookupSettings">&lt;LookupSettings&gt;
+  &lt;IgnoreCase&gt;true&lt;/IgnoreCase&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;TextLookupSetting&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetObject&gt;User&lt;/TargetObject&gt;
+      &lt;OptOut&gt;false&lt;/OptOut&gt;
+      &lt;TargetTextField&gt;Name&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/TextLookupSetting&gt;
+&lt;/LookupSettings&gt;</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="80"
+                      name="Secondary_Insurance__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sex__c]"
+                      dataType="wstr"
+                      length="1"
+                      name="Sex__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[State__c]"
+                      dataType="wstr"
+                      length="20"
+                      name="State__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="Status__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Therapy__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Therapy__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Zip__c]"
+                      dataType="wstr"
+                      length="5"
+                      name="Zip__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Cell_Phone__c]"
+                      dataType="wstr"
+                      length="40"
+                      name="Cell_Phone__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Patient_Hospital__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Patient_Hospital__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Primary_Ancillary_Agency__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary_Ancillary_Agency__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Referral_Organization__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Referral_Organization__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Work_Phone__c]"
+                      dataType="wstr"
+                      length="40"
+                      name="Work_Phone__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output]"
+                  isErrorOut="true"
+                  name="Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]"
+                      name="ErrorMessage" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Address__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Address__c]"
+                      name="Address__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[City__c]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[City__c]"
+                      name="City__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[DOB__c]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[DOB__c]"
+                      name="DOB__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Last_Referral_Date__c]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[MRN__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[MRN__c]"
+                      name="MRN__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="51"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="55"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Original_Sales_Rep__c]"
+                      name="Original_Sales_Rep__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Phone__c]"
+                      name="Phone__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Prescriber__c]"
+                      name="Prescriber__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Primary_Insurance__c]"
+                      name="Primary_Insurance__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Sales_Rep_HIT__c]"
+                      name="Sales_Rep_HIT__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Sales_Rep_Spec__c]"
+                      name="Sales_Rep_Spec__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Secondary_Insurance__c]"
+                      name="Secondary_Insurance__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Sex__c]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Sex__c]"
+                      name="Sex__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[State__c]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[State__c]"
+                      name="State__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Status__c]"
+                      dataType="wstr"
+                      length="9"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Status__c]"
+                      name="Status__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      length="22"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Therapy__c]"
+                      name="Therapy__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Zip__c]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Zip__c]"
+                      name="Zip__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Cell_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Cell_Phone__c]"
+                      name="Cell_Phone__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Patient_Hospital__c]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Patient_Hospital__c]"
+                      name="Patient_Hospital__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Primary_Ancillary_Agency__c]"
+                      dataType="wstr"
+                      length="22"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Primary_Ancillary_Agency__c]"
+                      name="Primary_Ancillary_Agency__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Referral_Organization__c]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Referral_Organization__c]"
+                      name="Referral_Organization__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Work_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[Work_Phone__c]"
+                      name="Work_Phone__c" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output]"
+                  name="Default Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[SalesforceRecordId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[SalesforceRecordId]"
+                      name="SalesforceRecordId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[IsNew]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[IsNew]"
+                      name="IsNew" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Address__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Address__c]"
+                      name="Address__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[City__c]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[City__c]"
+                      name="City__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[DOB__c]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[DOB__c]"
+                      name="DOB__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Last_Referral_Date__c]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[MRN__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[MRN__c]"
+                      name="MRN__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Name]"
+                      dataType="wstr"
+                      length="51"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="55"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Original_Sales_Rep__c]"
+                      name="Original_Sales_Rep__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Phone__c]"
+                      name="Phone__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      length="80"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Prescriber__c]"
+                      name="Prescriber__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Primary_Insurance__c]"
+                      name="Primary_Insurance__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Sales_Rep_HIT__c]"
+                      name="Sales_Rep_HIT__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Sales_Rep_Spec__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Sales_Rep_Spec__c]"
+                      name="Sales_Rep_Spec__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Secondary_Insurance__c]"
+                      name="Secondary_Insurance__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Sex__c]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Sex__c]"
+                      name="Sex__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[State__c]"
+                      dataType="wstr"
+                      length="2"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[State__c]"
+                      name="State__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Status__c]"
+                      dataType="wstr"
+                      length="9"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Status__c]"
+                      name="Status__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      length="22"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Therapy__c]"
+                      name="Therapy__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Zip__c]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Zip__c]"
+                      name="Zip__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Cell_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Cell_Phone__c]"
+                      name="Cell_Phone__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Patient_Hospital__c]"
+                      dataType="wstr"
+                      length="32"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Patient_Hospital__c]"
+                      name="Patient_Hospital__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Primary_Ancillary_Agency__c]"
+                      dataType="wstr"
+                      length="22"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Primary_Ancillary_Agency__c]"
+                      name="Primary_Ancillary_Agency__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Referral_Organization__c]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Referral_Organization__c]"
+                      name="Referral_Organization__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Work_Phone__c]"
+                      dataType="wstr"
+                      length="12"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[Work_Phone__c]"
+                      name="Work_Phone__c" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[ADO NET Source Error Output]"
+              endId="Package\Data Flow Task\ADO NET Destination.Inputs[ADO NET Destination Input]"
+              name="ADO NET Source Error Output"
+              startId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Error Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[ADO NET Source Output]"
+              endId="Package\Data Flow Task\Salesforce Destination.Inputs[Input]"
+              name="ADO NET Source Output"
+              startId="Package\Data Flow Task\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[Error Output]"
+              endId="Package\Data Flow Task\ADO NET Destination 1.Inputs[ADO NET Destination Input]"
+              name="Error Output"
+              startId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="60,60" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Data Flow Task\Salesforce Destination"
+          TopLeft="99,122" />
+        <NodeLayout
+          Size="158,44"
+          Id="Package\Data Flow Task\ADO NET Source"
+          TopLeft="101,14" />
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Data Flow Task\ADO NET Destination 1"
+          TopLeft="350,120" />
+        <NodeLayout
+          Size="179,42"
+          Id="Package\Data Flow Task\ADO NET Destination"
+          TopLeft="343,21" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ADO NET Source Output]"
+          TopLeft="180,58">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="10.5,64"
+              Start="0,0"
+              End="10.5,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="4,32" />
+                  <mssgle:LineSegment
+                    End="6.5,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="6.5,32"
+                    Point2="10.5,32"
+                    Point3="10.5,36" />
+                  <mssgle:LineSegment
+                    End="10.5,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[ADO NET Source Error Output]"
+          TopLeft="259,39">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="84,0"
+              Start="0,0"
+              End="76.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="76.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-29.189453125,5,134.87890625,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Error Output]"
+          TopLeft="282,142">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="68,0"
+              Start="0,0"
+              End="60.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="60.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="1.91361328125,5,56.6727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\ADO NET Destination 1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\ADO NET Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

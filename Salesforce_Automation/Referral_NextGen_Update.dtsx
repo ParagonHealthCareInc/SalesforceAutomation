@@ -1,0 +1,2087 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="7/29/2020 6:05:37 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SVRREPORTING01"
+  DTS:CreatorName="PHI\admin.ron"
+  DTS:DTSID="{C6BFA82E-66B2-4ACB-A159-31E4EE3A7F4C}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Referral_NextGen_Update"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="74"
+  DTS:VersionGUID="{21E852FD-DC46-4EF3-B028-870F4027E141}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{9DDD4FA1-F438-470D-8872-F9C0A886E31D}"
+      DTS:ObjectName="CLUSTERPHI\PHI.Salesforce">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=CLUSTERPHI\PHI;Initial Catalog=Salesforce;Integrated Security=True;Application Name=SSIS-Prescribers_CPR_30Min-{9DDD4FA1-F438-470D-8872-F9C0A886E31D}CLUSTERPHI\PHI.Salesforce;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Salesforce Connection Manager]"
+      DTS:CreationName="Salesforce (KingswaySoft)"
+      DTS:DTSID="{BD684695-40F3-47CE-B527-1ADC99F90E79}"
+      DTS:ObjectName="Salesforce Connection Manager">
+      <DTS:ObjectData>
+        <SalesforceConnectionManager
+          ConnectionString="InstanceType=Production;AuthenticationType=AuthorizationCode;ServiceEndpoint=SOAP;ServiceUrl=https://login.salesforce.com/services/Soap/u/50.0;RedirectUri=;UserName=postmaster@paragonhealthcare.com;ServiceTimeout=120;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;ProxyUsername=;RetryOnIntermittentErrors=True">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="vKDrLkLh9A=="
+            IV="BGj1MAp9p5s=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>BGj1MAp9p5tOlh441yPNH0Qkrq69fpXGhx+fsmcPTjpgWlTZk8f2LXdiVXXzny3U3P08fY2Mz0z0KDWPB+Mil4uF+98X9jDw4EGVdt510OiYG8nc27KhFb4errV58UYl</CipherValue>
+            </CipherData>
+          </EncryptedData>
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="QLJEO0YhMw=="
+            IV="ANNqhqW5Sw0=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>ANNqhqW5Sw0xgO9I1yCz7ASITKQHpTzwMTiUBPWvQuU4EpEcAe++l+czWM06pNT1MSBu59a5W56mE9WFbwiUa/a91/WyMj9uYb6traC5oJEGida2kLUteNRE/5fyIuQVnnsTFyO1fWPeB2labpQKi/akvweh1bUR</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </SalesforceConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SVRSQL05.NGProd.integration_user]"
+      DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      DTS:DTSID="{EDC66AC8-9DD7-4343-9547-55F6DCD76C57}"
+      DTS:ObjectName="SVRSQL05.NGProd.integration_user">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SVRSQL05;Initial Catalog=NGProd;Integrated Security=True;Application Name=SSIS-Prescribers_NextGen_30Min-{EDC66AC8-9DD7-4343-9547-55F6DCD76C57}SVRSQL05.NGProd.integration_user;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Upload NextGen Referrals to Salesforce"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2C6B6DDA-768F-4D1B-A757-E1149C4D5D24}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Upload NextGen Referrals to Salesforce"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Loads data into an ADO.NET-compliant database that uses a database table or view. Load data into a new or existing table. For example, use an ADO.NET provider for ODBC to load data into an ODBC destination."
+              name="ADO NET Destination 2"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The Destination database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">"dbo"."ReferralErrorLog"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows per batch. The default is 0 which uses the same size as SSIS internal buffer. "
+                  expressionType="Notify"
+                  name="BatchSize">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out. A value of 0 indicates infinite time-out. "
+                  expressionType="Notify"
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether to use the SqlBulkCopy interface to improve the performance of bulk insert operations. Only certain providers support this interface."
+                  expressionType="Notify"
+                  name="UseBulkInsertWhenPossible">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.ADONETDestination</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+                  connectionManagerRefId="Package.ConnectionManagers[CLUSTERPHI\PHI.Salesforce]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input]"
+                  errorRowDisposition="IgnoreFailure"
+                  hasSideEffects="true"
+                  name="ADO NET Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[ErrorCode]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[ErrorColumn]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[ErrorMessage]"
+                      cachedDataType="wstr"
+                      cachedLength="2048"
+                      cachedName="ErrorMessage"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[ErrorMessage]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[EMR_System__c]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="EMR_System__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[EMR_System__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[EMR_System__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="121"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Name]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Paragon_Site__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Paragon_Site__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Paragon_Site__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Paragon_Site__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Status__c]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Status__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Status__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Status__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Therapy__c]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Therapy__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Therapy__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Therapy__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Copy of Referral_ID__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of Referral_ID__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Referral_ID__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Referral_ID__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Copy of Patient__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of Patient__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Patient__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Patient__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Copy of Prescriber__c]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Copy of Prescriber__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Prescriber__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Prescriber__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].Columns[Copy of OwnerID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Copy of OwnerID"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[SALESREP]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OwnerID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Id]"
+                      dataType="i4"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Referral_ID__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Referral_ID__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Patient__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Patient__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="255"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Referral_Date__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Referral_Date__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Status__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Prescriber__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Therapy__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Therapy__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Primary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Secondary_Insurance__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[SALESREP]"
+                      dataType="wstr"
+                      length="255"
+                      name="SALESREP" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Original_Sales_Rep__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Paragon_Site__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[EMR_System__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="EMR_System__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[ErrorCode]"
+                      dataType="wstr"
+                      length="255"
+                      name="ErrorCode" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[ErrorColumn]"
+                      dataType="wstr"
+                      length="255"
+                      name="ErrorColumn" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[ErrorMessage]"
+                      dataType="wstr"
+                      length="2147483647"
+                      name="ErrorMessage" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input].ExternalColumns[CreatedDate]"
+                      dataType="dbTimeStamp"
+                      name="CreatedDate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Outputs[ADO NET Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="ADO NET Destination Error Output"
+                  synchronousInputId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Outputs[ADO NET Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Outputs[ADO NET Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server.;Microsoft Corporation; Microsoft SQL Server; © Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="Consumes data from SQL Server, OLE DB, ODBC, or Oracle, using the corresponding .NET Framework data provider. Use a Transact-SQL statement to define the result set. For example, extract data from SQL Server with the .NET Framework data provider for SQL Server."
+              name="ADO NET Source"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement used by the component to extract data."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">DECLARE
+	@start DATETIME;
+DECLARE
+	@end DATETIME;
+
+--30 Min Automation
+--SET @start = DATEADD(MINUTE, -31, GETDATE());
+--SET @end = GETDATE();
+
+--Previous Day
+--SET @start = DATEADD(DAY, DATEDIFF(DAY, 2, GETDATE()), 0);
+--SET @end = DATEADD(DAY, DATEDIFF(DAY, 0, GETDATE()), 0);
+
+--Previous Week Automation
+--SET @start = DATEADD(dd, -1, DATEADD(ww, DATEDIFF(ww, 0, GETDATE()) - 1, 0));
+--SET @end = DATEADD(dd, 5, DATEADD(ww, DATEDIFF(ww, 0, GETDATE()) - 1, 0));
+
+SET @start = '2021-01-01'
+SET @end = GetDate()
+
+
+
+DECLARE
+	@ActiveUsers AS TABLE (
+		ID nvarchar(18)
+	   ,Name nvarchar(121)
+	   ,IsActive bit
+	   ,Sales_District__c varchar(4000)
+	   ,Sales_Territory__c varchar(4000)
+	)
+INSERT INTO @ActiveUsers
+SELECT Id, Name, IsActive, Sales_District__c, Sales_Territory__c 
+FROM [CLUSTERSSRS\REPORTSERVICES].SALESFORCE.Staging.[User] u 
+WHERE u.IsActive = '1' 
+AND u.Sales_District__c LIKE '%IVC%'
+AND u.Sales_Territory__c IS NOT null
+
+--Optimized!
+SELECT
+	po.seq_no AS Referral_ID__c
+   ,UPPER(po.person_id) AS Patient__c
+   ,UPPER(CONCAT(LTRIM(RTRIM(p.first_name)), ' ', LTRIM(RTRIM(p.last_name)))) AS Name
+   ,ISNULL(CONVERT(DATE, CAST(po.create_timestamp AS DATE), 101), '') AS Last_Referral_Date__c
+   ,po.Order_Status AS Status__c
+   ,CASE
+		WHEN LTRIM(RTRIM(pm.national_provider_id)) IS NULL
+			THEN '9999999999'
+		WHEN LEN(LTRIM(RTRIM(pm.national_provider_id))) &lt; 10
+			THEN '9999999999'
+		ELSE LTRIM(RTRIM(pm.national_provider_id))
+	END AS Prescriber__c
+   ,po.Order_Type AS Therapy__c
+   ,ISNULL((SELECT TOP 1
+			ISNULL(SalesLevel, 'Others')
+		FROM MLTS_MedInfoXP_ mx
+		WHERE mx.ActiveInd = 'Y'
+		AND mx.DrugName = po.Medication1
+		ORDER BY ISNULL(mx.SalesLevel, '') DESC)
+	, 'Others') AS NextGen_Sales_Level__c
+	,CASE
+		WHEN (SELECT	
+			CASE 
+				WHEN p1.IVC_Territory__c IS NULL THEN '0051I000002GjcjQAC' 
+				ELSE (SELECT ID FROM @ActiveUsers WHERE Sales_Territory__c = p1.IVC_Territory__c)
+			END AS Sales_Rep_IVC__c
+		FROM [CLUSTERSSRS\REPORTSERVICES].[SALESFORCE].Staging.Prescribers p1
+		WHERE p1.NPI__c = (SELECT
+							LTRIM(RTRIM(pm.national_provider_id))
+						FROM provider_mstr pm (NOLOCK)
+						WHERE (SELECT TOP 1
+								po.Ordering_Provider_id
+							FROM PIVC_Orders_ po (NOLOCK)
+							WHERE po.person_id = p.person_id
+							ORDER BY po.Order_Date DESC)
+						= pm.provider_id)
+		AND pm.delete_ind = 'N') IS NULL THEN '0051I000002GjcjQAC'
+		ELSE (SELECT	
+			CASE 
+				WHEN p1.IVC_Territory__c IS NULL THEN '0051I000002GjcjQAC' 
+				ELSE (SELECT ID FROM @ActiveUsers WHERE Sales_Territory__c = p1.IVC_Territory__c)
+			END AS Sales_Rep_IVC__c
+		FROM [CLUSTERSSRS\REPORTSERVICES].[SALESFORCE].Staging.Prescribers p1
+		WHERE p1.NPI__c = (SELECT
+							LTRIM(RTRIM(pm.national_provider_id))
+						FROM provider_mstr pm (NOLOCK)
+						WHERE (SELECT TOP 1
+								po.Ordering_Provider_id
+							FROM PIVC_Orders_ po (NOLOCK)
+							WHERE po.person_id = p.person_id
+							ORDER BY po.Order_Date DESC)
+						= pm.provider_id)
+		AND pm.delete_ind = 'N') 
+	END AS OwnerID
+   ,CASE
+		WHEN (SELECT TOP 1
+					SUBSTRING(lm.external_id, CHARINDEX('-', lm.external_id) + 1, LEN(lm.external_id))
+				FROM PIVC_Orders_ p
+				LEFT JOIN location_mstr lm
+					ON p.Service_Location = lm.location_name
+				WHERE p.Service_Location = po.Service_Location)
+			IS NULL
+			THEN 'Not Assigned'
+		ELSE (SELECT TOP 1
+					SUBSTRING(lm.external_id, CHARINDEX('-', lm.external_id) + 1, LEN(lm.external_id))
+				FROM PIVC_Orders_ p
+				LEFT JOIN location_mstr lm
+					ON p.Service_Location = lm.location_name
+				WHERE p.Service_Location = po.Service_Location)
+	END AS Paragon_Site__c
+   ,'NextGen' AS EMR_System__c
+   ,CASE
+		WHEN NOT EXISTS (SELECT
+					*
+				FROM PIVC_Orders_ ou
+				WHERE ou.seq_no &lt;&gt; po.seq_no
+				AND ou.person_id = po.person_id
+				AND ou.Order_Type = po.Order_Type
+				AND ou.Ordering_Provider_id = po.Ordering_Provider_id)
+			THEN 1
+		ELSE 0
+	END AS NewOrder__c
+FROM PIVC_Orders_ po
+INNER JOIN person p
+	ON po.person_id = p.person_id
+INNER JOIN provider_mstr pm
+	ON po.Ordering_Provider_id = pm.provider_id
+WHERE po.person_id NOT IN ('EF477608-5F49-4159-A405-DB07E13EE7E4', '1EAA6B96-D42A-454F-86B4-BC669B3F6DFE', '1018C999-1B03-4B98-9A83-3FE166776450', '658921E3-C41F-46FE-A77C-B215A0F2CC75', 'D1C7E60B-F23F-477E-BCB4-7C3A2681B2EC', 'DCAF9281-84BC-4547-ABEC-68F68699110C')
+AND (po.modify_timestamp &gt;= @start
+AND po.modify_timestamp &lt;= @end)
+--AND pm.national_provider_id IN ('1811191786','1871557454')
+
+ORDER BY Paragon_Site__c</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether to allow non-string external columns to be implicitly converted to strings at the output columns."
+                  name="AllowImplicitStringConversion">true</property>
+                <property
+                  dataType="System.String"
+                  description="The Source database table name."
+                  expressionType="Notify"
+                  name="TableOrViewName"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the mode to retrieve external column information"
+                  name="AccessMode"
+                  typeConverter="Microsoft.SqlServer.Dts.Pipeline.DataReaderSourceAdapter+EnumToStringConverter">2</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">Microsoft.DataReaderSourceAdapter</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Connections[IDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[SVRSQL05.NGProd.integration_user]"
+                  connectionManagerRefId="Package.ConnectionManagers[SVRSQL05.NGProd.integration_user]"
+                  description="Managed connection manager"
+                  name="IDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output]"
+                  name="ADO NET Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Referral_ID__c]"
+                      dataType="guid"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Referral_ID__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Referral_ID__c]"
+                      name="Referral_ID__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Patient__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Patient__c]"
+                      length="40"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Patient__c]"
+                      name="Patient__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Name]"
+                      length="121"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Name]"
+                      name="Name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Last_Referral_Date__c]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Last_Referral_Date__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Status__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Status__c]"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Status__c]"
+                      name="Status__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Prescriber__c]"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber__c]"
+                      name="Prescriber__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Therapy__c]"
+                      length="30"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Therapy__c]"
+                      name="Therapy__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[NextGen_Sales_Level__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NextGen_Sales_Level__c]"
+                      length="100"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[NextGen_Sales_Level__c]"
+                      name="NextGen_Sales_Level__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[OwnerID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OwnerID]"
+                      length="18"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[OwnerID]"
+                      name="OwnerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Paragon_Site__c]"
+                      length="20"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[EMR_System__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EMR_System__c]"
+                      length="7"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[EMR_System__c]"
+                      name="EMR_System__c"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[NewOrder__c]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NewOrder__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[NewOrder__c]"
+                      name="NewOrder__c"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Referral_ID__c]"
+                      dataType="guid"
+                      name="Referral_ID__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Patient__c]"
+                      dataType="wstr"
+                      length="40"
+                      name="Patient__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="121"
+                      name="Name" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Last_Referral_Date__c]"
+                      dataType="dbDate"
+                      name="Last_Referral_Date__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="10"
+                      name="Status__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="10"
+                      name="Prescriber__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Therapy__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="Therapy__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NextGen_Sales_Level__c]"
+                      dataType="wstr"
+                      length="100"
+                      name="NextGen_Sales_Level__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[OwnerID]"
+                      dataType="wstr"
+                      length="18"
+                      name="OwnerID" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="20"
+                      name="Paragon_Site__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[EMR_System__c]"
+                      dataType="wstr"
+                      length="7"
+                      name="EMR_System__c" />
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].ExternalColumns[NewOrder__c]"
+                      dataType="i4"
+                      name="NewOrder__c" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output]"
+                  isErrorOut="true"
+                  name="ADO NET Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Referral_ID__c]"
+                      dataType="guid"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Referral_ID__c]"
+                      name="Referral_ID__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Patient__c]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Patient__c]"
+                      name="Patient__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="121"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Last_Referral_Date__c]"
+                      dataType="dbDate"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Status__c]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Status__c]"
+                      name="Status__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Prescriber__c]"
+                      name="Prescriber__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Therapy__c]"
+                      name="Therapy__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NextGen_Sales_Level__c]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NextGen_Sales_Level__c]"
+                      name="NextGen_Sales_Level__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OwnerID]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[OwnerID]"
+                      name="OwnerID" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EMR_System__c]"
+                      dataType="wstr"
+                      length="7"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[EMR_System__c]"
+                      name="EMR_System__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NewOrder__c]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[NewOrder__c]"
+                      name="NewOrder__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Data Conversion"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[ErrorCode]"
+                      cachedDataType="i4"
+                      cachedName="ErrorCode"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[ErrorColumn]"
+                      cachedDataType="i4"
+                      cachedName="ErrorColumn"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[ErrorMessage]"
+                      cachedDataType="wstr"
+                      cachedLength="2048"
+                      cachedName="ErrorMessage"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[EMR_System__c]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="EMR_System__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[EMR_System__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="121"
+                      cachedName="Name"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[OwnerID]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="OwnerID"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[OwnerID]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Paragon_Site__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Paragon_Site__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Paragon_Site__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Patient__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Patient__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Patient__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Prescriber__c]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Prescriber__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Prescriber__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Referral_ID__c]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Referral_ID__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Referral_ID__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Status__c]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Status__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Status__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Therapy__c]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Therapy__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Therapy__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[Last_Referral_Date__c]"
+                      cachedDataType="dbDate"
+                      cachedName="Last_Referral_Date__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Last_Referral_Date__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input].Columns[NextGen_Sales_Level__c]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="NextGen_Sales_Level__c"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[NextGen_Sales_Level__c]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ErrorCode]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ErrorCode]"
+                      name="Copy of ErrorCode"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ErrorColumn]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ErrorColumn]"
+                      name="Copy of ErrorColumn"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ErrorMessage]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="2048"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of ErrorMessage]"
+                      name="Copy of ErrorMessage"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMR_System__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="7"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMR_System__c]"
+                      name="Copy of EMR_System__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[EMR_System__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Name]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="121"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Name]"
+                      name="Copy of Name"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Name]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OwnerID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OwnerID]"
+                      name="Copy of OwnerID"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[OwnerID]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Paragon_Site__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Paragon_Site__c]"
+                      name="Copy of Paragon_Site__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Paragon_Site__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Patient__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Patient__c]"
+                      name="Copy of Patient__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Patient__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Prescriber__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Prescriber__c]"
+                      name="Copy of Prescriber__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Prescriber__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Referral_ID__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Referral_ID__c]"
+                      name="Copy of Referral_ID__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Referral_ID__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Status__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Status__c]"
+                      name="Copy of Status__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Status__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Therapy__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="30"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Therapy__c]"
+                      name="Copy of Therapy__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Therapy__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Last_Referral_Date__c]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Last_Referral_Date__c]"
+                      name="Copy of Last_Referral_Date__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Last_Referral_Date__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NextGen_Sales_Level__c]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      length="100"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NextGen_Sales_Level__c]"
+                      name="Copy of NextGen_Sales_Level__c"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[NextGen_Sales_Level__c]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2020 KingswaySoft Inc."
+              description="Populate data into Salesforce."
+              name="Salesforce Destination"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how data is written to Salesforce."
+                  expressionType="Notify"
+                  name="ActionType"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Salesforce.SalesforceDestinationActionType">5</property>
+                <property
+                  dataType="System.String"
+                  description="Destination object to write data."
+                  expressionType="Notify"
+                  name="DestinationObject">Referral__c</property>
+                <property
+                  dataType="System.Int32"
+                  description="Batch size"
+                  expressionType="Notify"
+                  name="BatchSize">5000</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the External ID field to be used for Salesforce upsert action."
+                  expressionType="Notify"
+                  name="UpsertExternalIdField">Referral_ID__c</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether you wan to use Salesforce Bulk API to load data."
+                  expressionType="Notify"
+                  name="UseBulkApi">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Bulk data format to use when Salesforce Bulk API is used."
+                  expressionType="Notify"
+                  name="BulkDataFormat"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.Salesforce.BulkDataFormat">2</property>
+                <property
+                  dataType="System.Int32"
+                  description="Bulk data format to use when Salesforce Bulk API is used."
+                  expressionType="Notify"
+                  name="ConcurrencyMode"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Salesforce.ConcurrencyMode">2</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to remove those invalid characters before writing to Salesforce."
+                  expressionType="Notify"
+                  name="RemoveInvalidCharacters">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="When true, datetime values should be sent to Salesforce in UTC format. The default is false, in which case, datetime values will be posted to Salesforce in local system time. "
+                  expressionType="Notify"
+                  name="SendDateTimeInUtcFormat">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to ignore those NULL-valued fields."
+                  expressionType="Notify"
+                  name="IgnoreNullValuedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to send empty strings as NULLs when writing to Salesforce. When disabled, empty strings will not be converted to NULL value, therefore will not be posted to Salesforce. This can be helpful in the case that you want to retain original values in Salesforce when the incoming value is empty (not NULL though). "
+                  expressionType="Notify"
+                  name="SendEmptyStringsAsNullValues">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to write batch files withUTF-8 encoding when using Bulk API to write to Salesforce."
+                  expressionType="Notify"
+                  name="WriteBatchFilesWithUtf8Encoding">true</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.Salesforce.SalesforceDestinationComponent</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Connections[Salesforce]"
+                  connectionManagerID="Package.ConnectionManagers[Salesforce Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Salesforce Connection Manager]"
+                  description="Salesforce Connection"
+                  name="Salesforce" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="RedirectRow"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[EMR_System__c]"
+                      cachedDataType="wstr"
+                      cachedLength="7"
+                      cachedName="EMR_System__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[EMR_System__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[EMR_System__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Name]"
+                      cachedDataType="wstr"
+                      cachedLength="121"
+                      cachedName="Name"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Name]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Name]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[OwnerID]"
+                      cachedDataType="wstr"
+                      cachedLength="18"
+                      cachedName="OwnerID"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[OwnerId]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[OwnerID]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Paragon_Site__c]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Paragon_Site__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Paragon_Site__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Paragon_Site__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Patient__c]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="Patient__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Patient__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Patient__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Prescriber__c]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Prescriber__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Prescriber__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Prescriber__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Referral_ID__c]"
+                      cachedDataType="guid"
+                      cachedName="Referral_ID__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Referral_ID__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Referral_ID__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Status__c]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Status__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Status__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Status__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Therapy__c]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Therapy__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Therapy__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Therapy__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[Last_Referral_Date__c]"
+                      cachedDataType="dbDate"
+                      cachedName="Last_Referral_Date__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Referral_Date__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[Last_Referral_Date__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[NextGen_Sales_Level__c]"
+                      cachedDataType="wstr"
+                      cachedLength="100"
+                      cachedName="NextGen_Sales_Level__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[NextGen_Sales_Level__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[NextGen_Sales_Level__c]" />
+                    <inputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].Columns[NewOrder__c]"
+                      cachedDataType="i4"
+                      cachedName="NewOrder__c"
+                      externalMetadataColumnId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[NewOrder__c]"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output].Columns[NewOrder__c]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Account__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Account__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Account</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Case_Manager__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Case_Manager__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Contact</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[EMR_System__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="EMR_System__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      name="Id">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Referral__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">id</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="80"
+                      name="Name">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Original_Sales_Rep__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Original_Sales_Rep__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      name="OwnerId">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="2">
+                            <arrayElement
+                              dataType="System.String">Group</arrayElement>
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="LookupSettings"></property>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="Paragon_Site__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Patient__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Patient__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Patient__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="LookupSettings">&lt;LookupSettings&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;TextLookupSetting&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetObject&gt;Patient__c&lt;/TargetObject&gt;
+      &lt;OptOut&gt;false&lt;/OptOut&gt;
+      &lt;TargetTextField&gt;MRN__c&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/TextLookupSetting&gt;
+&lt;/LookupSettings&gt;</property>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Prescriber__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Prescriber__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          name="LookupSettings">&lt;LookupSettings&gt;
+  &lt;IgnoreCase&gt;true&lt;/IgnoreCase&gt;
+  &lt;CacheStrategy&gt;FullCache&lt;/CacheStrategy&gt;
+  &lt;TextLookupSetting&gt;
+    &lt;LookupTarget&gt;
+      &lt;TargetObject&gt;Prescriber__c&lt;/TargetObject&gt;
+      &lt;OptOut&gt;false&lt;/OptOut&gt;
+      &lt;TargetTextField&gt;NPI__c&lt;/TargetTextField&gt;
+    &lt;/LookupTarget&gt;
+  &lt;/TextLookupSetting&gt;
+&lt;/LookupSettings&gt;</property>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Primary_Insurance__c]"
+                      dataType="wstr"
+                      length="80"
+                      name="Primary_Insurance__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Referral_Date__c]"
+                      dataType="dbDate"
+                      name="Referral_Date__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">date</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Referral_ID__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Referral_ID__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Secondary_Insurance__c]"
+                      dataType="wstr"
+                      length="80"
+                      name="Secondary_Insurance__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="80"
+                      name="Status__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[Therapy__c]"
+                      dataType="wstr"
+                      length="25"
+                      name="Therapy__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[NextGen_Sales_Level__c]"
+                      dataType="wstr"
+                      length="10"
+                      name="NextGen_Sales_Level__c">
+                      <properties>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[SOC__c]"
+                      dataType="dbDate"
+                      name="SOC__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">date</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input].ExternalColumns[NewOrder__c]"
+                      dataType="bool"
+                      name="NewOrder__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">boolean</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output]"
+                  isErrorOut="true"
+                  name="Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]"
+                      name="ErrorMessage" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[EMR_System__c]"
+                      dataType="wstr"
+                      length="7"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[EMR_System__c]"
+                      name="EMR_System__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Name]"
+                      dataType="wstr"
+                      length="121"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[OwnerID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[OwnerID]"
+                      name="OwnerID" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Patient__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Patient__c]"
+                      name="Patient__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Prescriber__c]"
+                      name="Prescriber__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Referral_ID__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Referral_ID__c]"
+                      name="Referral_ID__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Status__c]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Status__c]"
+                      name="Status__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Therapy__c]"
+                      name="Therapy__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Last_Referral_Date__c]"
+                      dataType="dbDate"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[NextGen_Sales_Level__c]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[NextGen_Sales_Level__c]"
+                      name="NextGen_Sales_Level__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[NewOrder__c]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output].Columns[NewOrder__c]"
+                      name="NewOrder__c" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output]"
+                  name="Default Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[SalesforceRecordId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[SalesforceRecordId]"
+                      name="SalesforceRecordId" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[IsNew]"
+                      dataType="bool"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[IsNew]"
+                      name="IsNew" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[EMR_System__c]"
+                      dataType="wstr"
+                      length="7"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[EMR_System__c]"
+                      name="EMR_System__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Name]"
+                      dataType="wstr"
+                      length="121"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Name]"
+                      name="Name" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[OwnerID]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[OwnerID]"
+                      name="OwnerID" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Paragon_Site__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Paragon_Site__c]"
+                      name="Paragon_Site__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Patient__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Patient__c]"
+                      name="Patient__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Prescriber__c]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Prescriber__c]"
+                      name="Prescriber__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Referral_ID__c]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Referral_ID__c]"
+                      name="Referral_ID__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Status__c]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Status__c]"
+                      name="Status__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Therapy__c]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Therapy__c]"
+                      name="Therapy__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Last_Referral_Date__c]"
+                      dataType="dbDate"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[Last_Referral_Date__c]"
+                      name="Last_Referral_Date__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[NextGen_Sales_Level__c]"
+                      dataType="wstr"
+                      length="100"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[NextGen_Sales_Level__c]"
+                      name="NextGen_Sales_Level__c" />
+                    <outputColumn
+                      refId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[NewOrder__c]"
+                      dataType="i4"
+                      lineageId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Default Output].Columns[NewOrder__c]"
+                      name="NewOrder__c" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Upload NextGen Referrals to Salesforce.Paths[ADO NET Source Output]"
+              endId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Inputs[Input]"
+              name="ADO NET Source Output"
+              startId="Package\Upload NextGen Referrals to Salesforce\ADO NET Source.Outputs[ADO NET Source Output]" />
+            <path
+              refId="Package\Upload NextGen Referrals to Salesforce.Paths[Data Conversion Output]"
+              endId="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2.Inputs[ADO NET Destination Input]"
+              name="Data Conversion Output"
+              startId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\Upload NextGen Referrals to Salesforce.Paths[Error Output]"
+              endId="Package\Upload NextGen Referrals to Salesforce\Data Conversion.Inputs[Data Conversion Input]"
+              name="Error Output"
+              startId="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination.Outputs[Error Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="264,42"
+          Id="Package\Upload NextGen Referrals to Salesforce"
+          TopLeft="69,72" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Upload NextGen Referrals to Salesforce">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="158,42"
+          Id="Package\Upload NextGen Referrals to Salesforce\ADO NET Source"
+          TopLeft="109,27" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Upload NextGen Referrals to Salesforce\Data Conversion"
+          TopLeft="267,233" />
+        <NodeLayout
+          Size="188,42"
+          Id="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2"
+          TopLeft="376,130" />
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Upload NextGen Referrals to Salesforce\Salesforce Destination"
+          TopLeft="92,128" />
+        <EdgeLayout
+          Id="Package\Upload NextGen Referrals to Salesforce.Paths[Error Output]"
+          TopLeft="183.5,170">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="136.833333333333,63"
+              Start="0,0"
+              End="136.833333333333,55.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.4162436548223" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,33.4162436548223"
+                    Point2="0,37.4162436548223"
+                    Point3="4,37.4162436548223" />
+                  <mssgle:LineSegment
+                    End="132.833333333333,37.4162436548223" />
+                  <mssgle:CubicBezierSegment
+                    Point1="132.833333333333,37.4162436548223"
+                    Point2="136.833333333333,37.4162436548223"
+                    Point3="136.833333333333,41.4162436548223" />
+                  <mssgle:LineSegment
+                    End="136.833333333333,55.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="40.0802799479167,42.4162436548223,56.6727734375,11.43359375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload NextGen Referrals to Salesforce.Paths[Data Conversion Output]"
+          TopLeft="369.666666666667,233">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="100.333333333333,-61"
+              Start="0,0"
+              End="100.333333333333,-53.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-20.7715736040609" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-20.7715736040609"
+                    Point2="0,-24.7715736040609"
+                    Point3="4,-24.7715736040609" />
+                  <mssgle:LineSegment
+                    End="96.3333333333334,-24.7715736040609" />
+                  <mssgle:CubicBezierSegment
+                    Point1="96.3333333333334,-24.7715736040609"
+                    Point2="100.333333333333,-24.7715736040609"
+                    Point3="100.333333333333,-28.7715736040609" />
+                  <mssgle:LineSegment
+                    End="100.333333333333,-53.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Upload NextGen Referrals to Salesforce.Paths[ADO NET Source Output]"
+          TopLeft="185.75,69">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upload NextGen Referrals to Salesforce\ADO NET Destination 2">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Upload NextGen Referrals to Salesforce\ADO NET Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

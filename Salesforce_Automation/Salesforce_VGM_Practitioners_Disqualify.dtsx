@@ -1,0 +1,1736 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/25/2022 1:40:04 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SVRREPORTING01"
+  DTS:CreatorName="PHI\csekhar"
+  DTS:DTSID="{8301832C-DC03-4727-B12A-AECB7933128E}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Salesforce_VGM_Practitioners_Disqualify"
+  DTS:PackageType="5"
+  DTS:VersionBuild="8"
+  DTS:VersionGUID="{D47134AF-BAF8-4088-99AF-D950895C636E}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[D_XF]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{C91009D7-3C41-4E69-AE33-1A83733E2820}"
+      DTS:ObjectName="D_XF">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DWDBHA;Initial Catalog=XREFDATA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Salesforce Connection Manager 1]"
+      DTS:CreationName="Salesforce (KingswaySoft)"
+      DTS:DTSID="{F0798387-43C3-4E13-A077-C4ED68CC2F10}"
+      DTS:ObjectName="Salesforce Connection Manager 1">
+      <DTS:ObjectData>
+        <SalesforceConnectionManager
+          ConnectionString="InstanceType=Production;AuthenticationType=AuthorizationCode;ServiceEndpoint=SOAP;ServiceUrl=https://login.salesforce.com/services/Soap/u/50.0;RedirectUri=;UserName=postmaster@paragonhealthcare.com;ServiceTimeout=120;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;ProxyUsername=;RetryOnIntermittentErrors=True">
+          <Password
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAXJ32mrHptkK4pEOwPaIcxwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAADNJTT+dZXVlim+OyuIlQBxAAAAAASAAACgAAAAEAAAAH88cj2Jr/mJyZpJ2/980zMYAAAApMDGdkOgS+90eh+HxzlRbjnNduxxw8F+FAAAAPWNn7LmEcaRJ9vnCPpbKRK7CFjT</Password>
+          <SecurityToken
+            Sensitive="1" xmlns="www.microsoft.com/SqlServer/Dts"
+            Encrypted="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAXJ32mrHptkK4pEOwPaIcxwAAAAAIAAAARABUAFMAAAADZgAAwAAAABAAAAAHpQrAfBuaXKVhD+bedt+gAAAAAASAAACgAAAAEAAAAL6hBA85W7SZfwle2RCSr+U4AAAAEokSHHlSjF+7V8PojBIz2Ersrvc72Bsq9iKvmN8xu8RugKYdTQ2RPX/T3kV2OyrBZgKpgpH2KVUUAAAA+4UfpyiA27BlY4rlA5gfNu9d3cc</SecurityToken>
+        </SalesforceConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{8EB7FAEE-9CFC-44CF-8C99-3DE128310334}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">Select 
+	v.Id, 'Disqualified' Status__c
+	
+from 
+(Select 
+	* 
+from 
+	[XREFDATA].[dbo].[VGM_Practitioners] m 
+where 
+	Version='May2021'
+	and not exists (select * from [XREFDATA].[dbo].Paragon_Individuals_repost o where o.HMS_PIID = m.HMS_PIID)) c
+inner join VGM_PRACTITIONERS__C v on v.HMS_PIID__c=c.HMS_PIID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[D_XF]"
+                  connectionManagerRefId="Package.ConnectionManagers[D_XF]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]"
+                      name="Id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status__c]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status__c]"
+                      length="12"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status__c]"
+                      name="Status__c"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      name="Id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[Status__c]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      name="Status__c" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Id]"
+                      name="Id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status__c]"
+                      codePage="1252"
+                      dataType="str"
+                      length="12"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[Status__c]"
+                      name="Status__c" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\Salesforce Destination"
+              componentClassID="Microsoft.ManagedComponentHost"
+              contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2020 KingswaySoft Inc."
+              description="Populate data into Salesforce."
+              name="Salesforce Destination"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how data is written to Salesforce."
+                  expressionType="Notify"
+                  name="ActionType"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Salesforce.SalesforceDestinationActionType">3</property>
+                <property
+                  dataType="System.String"
+                  description="Destination object to write data."
+                  expressionType="Notify"
+                  name="DestinationObject">VGM_Practitioner__c</property>
+                <property
+                  dataType="System.Int32"
+                  description="Batch size"
+                  expressionType="Notify"
+                  name="BatchSize">200</property>
+                <property
+                  dataType="System.String"
+                  description="Specify the External ID field to be used for Salesforce upsert action."
+                  expressionType="Notify"
+                  name="UpsertExternalIdField"></property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether you wan to use Salesforce Bulk API to load data."
+                  expressionType="Notify"
+                  name="UseBulkApi">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Bulk data format to use when Salesforce Bulk API is used."
+                  expressionType="Notify"
+                  name="BulkDataFormat"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.Salesforce.BulkDataFormat">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Concurrency mode when Salesforce Bulk API is used."
+                  expressionType="Notify"
+                  name="ConcurrencyMode"
+                  typeConverter="KingswaySoft.IntegrationToolkit.Salesforce.ConcurrencyMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to remove those invalid characters before writing to Salesforce."
+                  expressionType="Notify"
+                  name="RemoveInvalidCharacters">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="When true, datetime values should be sent to Salesforce in UTC format. The default is false, in which case, datetime values will be posted to Salesforce in local system time. "
+                  expressionType="Notify"
+                  name="SendDateTimeInUtcFormat">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to ignore those NULL-valued fields."
+                  expressionType="Notify"
+                  name="IgnoreNullValuedFields">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to send empty strings as NULLs when writing to Salesforce. When disabled, empty strings will not be converted to NULL value, therefore will not be posted to Salesforce. This can be helpful in the case that you want to retain original values in Salesforce when the incoming value is empty (not NULL though). "
+                  expressionType="Notify"
+                  name="SendEmptyStringsAsNullValues">true</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Specify whether to write batch files withUTF-8 encoding when using Bulk API to write to Salesforce."
+                  expressionType="Notify"
+                  name="WriteBatchFilesWithUtf8Encoding">false</property>
+                <property
+                  dataType="System.String"
+                  name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.Salesforce.SalesforceDestinationComponent</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Salesforce Destination.Connections[Salesforce]"
+                  connectionManagerID="Package.ConnectionManagers[Salesforce Connection Manager 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[Salesforce Connection Manager 1]"
+                  description="Salesforce Connection"
+                  name="Salesforce" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Id]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="Id"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Id]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].Columns[Status__c]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="12"
+                      cachedName="Status__c"
+                      externalMetadataColumnId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Status__c]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[Status__c]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Active_Prescriber__c]"
+                      dataType="bool"
+                      name="Active_Prescriber__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">boolean</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Address_1__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Address_1__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Address_2__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Address_2__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Allergy_Count__c]"
+                      dataType="numeric"
+                      name="Allergy_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Allergy_Rank__c]"
+                      dataType="numeric"
+                      name="Allergy_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Antibiotics_Count__c]"
+                      dataType="numeric"
+                      name="Antibiotics_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Antibiotics_Rank__c]"
+                      dataType="numeric"
+                      name="Antibiotics_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[City__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="City__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Credential__c]"
+                      dataType="wstr"
+                      length="10"
+                      name="Credential__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Demographic_Info_Reason__c]"
+                      dataType="wstr"
+                      length="255"
+                      name="Demographic_Info_Reason__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">textarea</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Disqualified_Notes__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="Disqualified_Notes__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">textarea</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Enteral_Count__c]"
+                      dataType="numeric"
+                      name="Enteral_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Enteral_Rank__c]"
+                      dataType="numeric"
+                      name="Enteral_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Entyvio_Count__c]"
+                      dataType="numeric"
+                      name="Entyvio_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Entyvio_Rank__c]"
+                      dataType="numeric"
+                      name="Entyvio_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Factor_Count__c]"
+                      dataType="numeric"
+                      name="Factor_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Factor_Rank__c]"
+                      dataType="numeric"
+                      name="Factor_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Fax__c]"
+                      dataType="wstr"
+                      length="40"
+                      name="Fax__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">phone</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[First_Name__c]"
+                      dataType="wstr"
+                      length="20"
+                      name="First_Name__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[HIT_District__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="HIT_District__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[HIT_Territory__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="HIT_Territory__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[HMS_PIID__c]"
+                      dataType="wstr"
+                      length="15"
+                      name="HMS_PIID__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[HMS_Specialty_1__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="HMS_Specialty_1__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[HMS_Specialty_2__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="HMS_Specialty_2__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Id]"
+                      dataType="wstr"
+                      length="18"
+                      name="Id">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">id</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">VGM_Practitioner__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Inotropes_Count__c]"
+                      dataType="numeric"
+                      name="Inotropes_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Inotropes_Rank__c]"
+                      dataType="numeric"
+                      name="Inotropes_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[IVC_District__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="IVC_District__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[IVC_Territory__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="IVC_Territory__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[IVIG_Count__c]"
+                      dataType="numeric"
+                      name="IVIG_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[IVIG_Rank__c]"
+                      dataType="numeric"
+                      name="IVIG_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Krystexxa_Count__c]"
+                      dataType="numeric"
+                      name="Krystexxa_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Krystexxa_Rank__c]"
+                      dataType="numeric"
+                      name="Krystexxa_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Last_Name__c]"
+                      dataType="wstr"
+                      length="30"
+                      name="Last_Name__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Latitude__c]"
+                      dataType="numeric"
+                      name="Latitude__c"
+                      precision="18"
+                      scale="15">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Lead__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Lead__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Lead</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Lemtrade_Count__c]"
+                      dataType="numeric"
+                      name="Lemtrade_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Lemtrade_Rank__c]"
+                      dataType="numeric"
+                      name="Lemtrade_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Longitude__c]"
+                      dataType="numeric"
+                      name="Longitude__c"
+                      precision="18"
+                      scale="15">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[MAR_HEMO__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="MAR_HEMO__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">maps__AssignmentRule__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[MAR_HIT__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="MAR_HIT__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">maps__AssignmentRule__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[MAR_IVC__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="MAR_IVC__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">maps__AssignmentRule__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Middle_Name__c]"
+                      dataType="wstr"
+                      length="20"
+                      name="Middle_Name__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Name]"
+                      dataType="wstr"
+                      length="80"
+                      name="Name">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Neuro_Count__c]"
+                      dataType="numeric"
+                      name="Neuro_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Neuro_Rank__c]"
+                      dataType="numeric"
+                      name="Neuro_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[NPI__c]"
+                      dataType="wstr"
+                      length="10"
+                      name="NPI__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Ocrevus_Count__c]"
+                      dataType="numeric"
+                      name="Ocrevus_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Ocrevus_Rank__c]"
+                      dataType="numeric"
+                      name="Ocrevus_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Old_Classification_M__c]"
+                      dataType="wstr"
+                      length="20"
+                      name="Old_Classification_M__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Onpattro_Count__c]"
+                      dataType="numeric"
+                      name="Onpattro_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Onpattro_Rank__c]"
+                      dataType="numeric"
+                      name="Onpattro_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Orencia_Count__c]"
+                      dataType="numeric"
+                      name="Orencia_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Orencia_Rank__c]"
+                      dataType="numeric"
+                      name="Orencia_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[OwnerId]"
+                      dataType="wstr"
+                      length="18"
+                      name="OwnerId">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="2">
+                            <arrayElement
+                              dataType="System.String">Group</arrayElement>
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Phone__c]"
+                      dataType="wstr"
+                      length="40"
+                      name="Phone__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">phone</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Practitioner_Type__c]"
+                      dataType="wstr"
+                      length="50"
+                      name="Practitioner_Type__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Prescriber__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Prescriber__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">Prescriber__c</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Remicade_Count__c]"
+                      dataType="numeric"
+                      name="Remicade_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Remicade_Rank__c]"
+                      dataType="numeric"
+                      name="Remicade_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Rheum_Count__c]"
+                      dataType="numeric"
+                      name="Rheum_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Rheum_Rank__c]"
+                      dataType="numeric"
+                      name="Rheum_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Rituxan_Count__c]"
+                      dataType="numeric"
+                      name="Rituxan_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Rituxan_Rank__c]"
+                      dataType="numeric"
+                      name="Rituxan_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_HEMO__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Sales_Rep_HEMO__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_HIT__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Sales_Rep_HIT__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Sales_Rep_IVC__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="Sales_Rep_IVC__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Soliris_Count__c]"
+                      dataType="numeric"
+                      name="Soliris_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Soliris_Rank__c]"
+                      dataType="numeric"
+                      name="Soliris_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[State__c]"
+                      dataType="wstr"
+                      length="2"
+                      name="State__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Status__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="Status__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Suffix__c]"
+                      dataType="wstr"
+                      length="5"
+                      name="Suffix__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Tepezza_Count__c]"
+                      dataType="numeric"
+                      name="Tepezza_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Tepezza_Rank__c]"
+                      dataType="numeric"
+                      name="Tepezza_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[TPN_Count__c]"
+                      dataType="numeric"
+                      name="TPN_Count__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[TPN_Rank__c]"
+                      dataType="numeric"
+                      name="TPN_Rank__c"
+                      precision="18">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">double</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Classification__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="VGM_Classification__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Classification_M__c]"
+                      dataType="wstr"
+                      length="4000"
+                      name="VGM_Classification_M__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">picklist</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Classification_M_Updated_By__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="VGM_Classification_M_Updated_By__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Classification_M_Updated_On__c]"
+                      dataType="dbTimeStamp"
+                      name="VGM_Classification_M_Updated_On__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">datetime</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Classification_Manually_Updated__c]"
+                      dataType="bool"
+                      name="VGM_Classification_Manually_Updated__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">boolean</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Classification_Updated_By__c]"
+                      dataType="wstr"
+                      length="18"
+                      name="VGM_Classification_Updated_By__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">reference</property>
+                        <property
+                          dataType="System.String"
+                          isArray="true"
+                          name="LookupTypes">
+                          <arrayElements
+                            arrayElementCount="1">
+                            <arrayElement
+                              dataType="System.String">User</arrayElement>
+                          </arrayElements>
+                        </property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Classification_Updated_On__c]"
+                      dataType="dbTimeStamp"
+                      name="VGM_Classification_Updated_On__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">datetime</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Last_Modified__c]"
+                      dataType="dbDate"
+                      name="VGM_Last_Modified__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">date</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[VGM_Old_Classification__c]"
+                      dataType="wstr"
+                      length="20"
+                      name="VGM_Old_Classification__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Inputs[Input].ExternalColumns[Zip__c]"
+                      dataType="wstr"
+                      length="5"
+                      name="Zip__c">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          name="FieldType">string</property>
+                        <property
+                          dataType="System.Null"
+                          name="LookupTypes" />
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Error Output"
+                  synchronousInputId="Package\Data Flow Task\Salesforce Destination.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]"
+                      dataType="wstr"
+                      length="2048"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Error Output].Columns[ErrorMessage]"
+                      name="ErrorMessage" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output]"
+                  exclusionGroup="1"
+                  name="Default Output"
+                  synchronousInputId="Package\Data Flow Task\Salesforce Destination.Inputs[Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[SalesforceRecordId]"
+                      dataType="wstr"
+                      length="18"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[SalesforceRecordId]"
+                      name="SalesforceRecordId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[IsNew]"
+                      dataType="bool"
+                      lineageId="Package\Data Flow Task\Salesforce Destination.Outputs[Default Output].Columns[IsNew]"
+                      name="IsNew" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Salesforce Destination.Inputs[Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151.2,41.6"
+          Id="Package\Data Flow Task"
+          TopLeft="241,46" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="183.2,41.6"
+          Id="Package\Data Flow Task\Salesforce Destination"
+          TopLeft="112.285709760627,161.964706148326" />
+        <NodeLayout
+          Size="150.4,41.6"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="120.857139567939,30.3411765735454" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="199.971424664283,71.9411765735454">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,90.0235295747803"
+              Start="0,0"
+              End="0,82.5235295747803">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,82.5235295747803" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

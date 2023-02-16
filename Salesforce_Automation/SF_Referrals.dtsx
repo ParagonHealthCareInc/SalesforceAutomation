@@ -1,0 +1,1118 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/26/2021 12:05:06 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="SVRREPORTING01"
+  DTS:CreatorName="PHI\admin.ajakaye"
+  DTS:DTSID="{877F7153-3762-43F9-BB8A-A16DF564BD93}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="SF_Referrals"
+  DTS:PackageType="5"
+  DTS:ProtectionLevel="2"
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{D3B10440-370D-4D7B-B23A-3B559A523026}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DXF]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{068FE668-EAED-410C-8567-76F01499A7A5}"
+      DTS:ObjectName="DXF">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DWDBHA;Initial Catalog=XREFDATA;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Salesforce Connection Manager]"
+      DTS:CreationName="Salesforce (KingswaySoft)"
+      DTS:DTSID="{17CC2F99-DBA0-41C1-8C45-9F2BBEE81E79}"
+      DTS:ObjectName="Salesforce Connection Manager">
+      <DTS:ObjectData>
+        <SalesforceConnectionManager
+          ConnectionString="InstanceType=Production;AuthenticationType=AuthorizationCode;ServiceEndpoint=SOAP;ServiceUrl=https://login.salesforce.com/services/Soap/u/50.0;RedirectUri=;UserName=postmaster@paragonhealthcare.com;ServiceTimeout=160;ProxyMode=NoProxy;ProxyServer=;ProxyServerPort=0;ProxyUsername=;RetryOnIntermittentErrors=True">
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="hNwjSLpEYw=="
+            IV="fqDCvsSssEM=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>fqDCvsSssEORj1lcFj8AsZ2W2YQkxIWwzpyw7j4YPg2FxW6K7SfS6fZ90r/5ZScIyguTx1Fm19nguW/BDMT1uzPc4sYS9UcgidIwQ5J8eMwobQOkCK/EoW2d94VSKM2U</CipherValue>
+            </CipherData>
+          </EncryptedData>
+          <EncryptedData
+            Type="http://www.w3.org/2001/04/xmlenc#Element"
+            Salt="Z5c+qU7CQQ=="
+            IV="YDcZ0RmyJmg=" xmlns="http://www.w3.org/2001/04/xmlenc#">
+            <EncryptionMethod
+              Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc" />
+            <CipherData>
+              <CipherValue>YDcZ0RmyJmjrmiLnzT3n512JWJCZHF6f8HQ7gUmGmBIl272vKx6jyqBzgDwtSL1LXchhW7RV0sxYz1jPuP4PB+UWsF39SIqb9HIQi07/T7tz6X5BFsE/pfyjzYO+wZqFYolpxWVBo+j+xuVcYFXB0eussanrhXx0</CipherValue>
+            </CipherData>
+          </EncryptedData>
+        </SalesforceConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[SVRREPORTING01\PHIREPORTING]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{5AA0402C-68B1-48C0-A2E8-D70D8B286ECA}"
+      DTS:ObjectName="SVRREPORTING01\PHIREPORTING">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=SVRREPORTING01\PHIREPORTING;Initial Catalog=SystemConfigurations;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Sequence Container"
+      DTS:CreationName="STOCK:SEQUENCE"
+      DTS:Description="Sequence Container"
+      DTS:DTSID="{A1759DD7-B137-4645-B240-DB5590398D53}"
+      DTS:ExecutableType="STOCK:SEQUENCE"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Sequence Container">
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\Execute SQL Task"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{D487931A-AF71-458A-806A-6E54DB3DFA78}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Execute SQL Task"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{068FE668-EAED-410C-8567-76F01499A7A5}"
+              SQLTask:SqlStatementSource="Truncate table [dbo].[SF_Referrals]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Sequence Container\SF Load for Referral"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{0AD1B5C8-6857-4B10-8F89-BD664A7C4998}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="SF Load for Referral"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Sequence Container\SF Load for Referral\Data Conversion"
+                  componentClassID="Microsoft.DataConvert"
+                  contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Data Conversion"
+                  name="Data Conversion"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input]"
+                      name="Data Conversion Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input].Columns[EMR_System__c]"
+                          cachedDataType="wstr"
+                          cachedLength="4000"
+                          cachedName="EMR_System__c"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[EMR_System__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input].Columns[CPR_ID__c]"
+                          cachedDataType="wstr"
+                          cachedLength="10"
+                          cachedName="CPR_ID__c"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_ID__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input].Columns[NextGen_ID__c]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="NextGen_ID__c"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[NextGen_ID__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input].Columns[CPR_Owner__c]"
+                          cachedDataType="wstr"
+                          cachedLength="18"
+                          cachedName="CPR_Owner__c"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_Owner__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input].Columns[Referral_ID__c]"
+                          cachedDataType="wstr"
+                          cachedLength="50"
+                          cachedName="Referral_ID__c"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Referral_ID__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input].Columns[OwnerId]"
+                          cachedDataType="wstr"
+                          cachedLength="18"
+                          cachedName="OwnerId"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[OwnerId]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input].Columns[LastModifiedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LastModifiedDate"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[LastModifiedDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output]"
+                      exclusionGroup="1"
+                      name="Data Conversion Output"
+                      synchronousInputId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMR_System__c]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="4000"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMR_System__c]"
+                          name="Copy of EMR_System__c"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[EMR_System__c]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CPR_ID__c]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="10"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CPR_ID__c]"
+                          name="Copy of CPR_ID__c"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_ID__c]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NextGen_ID__c]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NextGen_ID__c]"
+                          name="Copy of NextGen_ID__c"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[NextGen_ID__c]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CPR_Owner__c]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="18"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CPR_Owner__c]"
+                          name="Copy of CPR_Owner__c"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_Owner__c]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Referral_ID__c]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="50"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Referral_ID__c]"
+                          name="Copy of Referral_ID__c"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Referral_ID__c]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OwnerId]"
+                          codePage="1252"
+                          dataType="str"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          length="18"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OwnerId]"
+                          name="Copy of OwnerId"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[OwnerId]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastModifiedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastModifiedDate]"
+                          name="Copy of LastModifiedDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.Int32"
+                              description="Specifies the input column used as the source of data for the conversion."
+                              name="SourceInputColumnLineageID">#{Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[LastModifiedDate]}</property>
+                            <property
+                              dataType="System.Boolean"
+                              description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                              name="FastParse">false</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Data Conversion Error Output"
+                      synchronousInputId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="OLE DB Destination"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[dbo].[SF_Referrals]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[DXF]"
+                      connectionManagerRefId="Package.ConnectionManagers[DXF]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of EMR_System__c]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="4000"
+                          cachedName="Copy of EMR_System__c"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMR System]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of EMR_System__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of CPR_ID__c]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="10"
+                          cachedName="Copy of CPR_ID__c"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CPRID]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CPR_ID__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of Referral_ID__c]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Copy of Referral_ID__c"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReferralID]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of Referral_ID__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of NextGen_ID__c]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="50"
+                          cachedName="Copy of NextGen_ID__c"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NextGenID]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of NextGen_ID__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of CPR_Owner__c]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="18"
+                          cachedName="Copy of CPR_Owner__c"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OwnerName]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of CPR_Owner__c]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of OwnerId]"
+                          cachedCodepage="1252"
+                          cachedDataType="str"
+                          cachedLength="18"
+                          cachedName="Copy of OwnerId"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OwnerID]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of OwnerId]" />
+                        <inputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[Copy of LastModifiedDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="Copy of LastModifiedDate"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifyDate]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output].Columns[Copy of LastModifiedDate]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[EMR System]"
+                          codePage="1252"
+                          dataType="str"
+                          length="4000"
+                          name="EMR System" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CPRID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="10"
+                          name="CPRID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ReferralID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="ReferralID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NextGenID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="50"
+                          name="NextGenID" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OwnerName]"
+                          codePage="1252"
+                          dataType="str"
+                          length="30"
+                          name="OwnerName" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ModifyDate]"
+                          dataType="dbTimeStamp"
+                          name="ModifyDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OwnerID]"
+                          codePage="1252"
+                          dataType="str"
+                          length="18"
+                          name="OwnerID" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Sequence Container\SF Load for Referral\Salesforce Source"
+                  componentClassID="Microsoft.ManagedComponentHost"
+                  contactInfo="KingswaySoft Inc.; http://www.kingswaysoft.com; support@kingswaysoft.com; Copyright (c) 2020 KingswaySoft Inc."
+                  description="Extract data from Salesforce."
+                  name="Salesforce Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the type of source data from Salesforce"
+                      expressionType="Notify"
+                      name="SourceType"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Salesforce.SalesforceSourceType">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Salesforce object to retrieve data from."
+                      expressionType="Notify"
+                      name="SourceObject">Referral__c</property>
+                    <property
+                      dataType="System.String"
+                      description="Salesforce object query statement."
+                      expressionType="Notify"
+                      name="ObjectQuery"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the batch size of the query."
+                      expressionType="Notify"
+                      name="BatchSize">0</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specifies whether deleted or archived records should be returned."
+                      expressionType="Notify"
+                      name="IncludeDeletedArchived">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Specify whether to use Salesforce Bulk API to read data."
+                      expressionType="Notify"
+                      name="UseBulkApi">true</property>
+                    <property
+                      dataType="System.Null"
+                      description="Specifies the output timezone for Salesforce datetime values."
+                      expressionType="Notify"
+                      name="OutputTimezone"
+                      typeConverter="KingswaySoft.IntegrationToolkit.Common.DescriptiveEnumTypeConverter`1[[KingswaySoft.IntegrationToolkit.Salesforce.SfdcSourceOutputTimezone" />
+                    <property
+                      dataType="System.String"
+                      description="Specify the PK Chunking Header that helps with Bulk API data read performance."
+                      expressionType="Notify"
+                      name="PKChunkingHeader"></property>
+                    <property
+                      dataType="System.String"
+                      name="UserComponentTypeName">KingswaySoft.IntegrationToolkit.Salesforce.SalesforceSourceComponent</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Connections[Salesforce]"
+                      connectionManagerID="Package.ConnectionManagers[Salesforce Connection Manager]"
+                      connectionManagerRefId="Package.ConnectionManagers[Salesforce Connection Manager]"
+                      description="Salesforce Connection"
+                      name="Salesforce" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output]"
+                      name="Salesforce Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[EMR_System__c]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[EMR_System__c]"
+                          length="4000"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[EMR_System__c]"
+                          name="EMR_System__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_ID__c]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[CPR_ID__c]"
+                          length="10"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_ID__c]"
+                          name="CPR_ID__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[NextGen_ID__c]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[NextGen_ID__c]"
+                          length="50"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[NextGen_ID__c]"
+                          name="NextGen_ID__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_Owner__c]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[CPR_Owner__c]"
+                          length="18"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[CPR_Owner__c]"
+                          name="CPR_Owner__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Referral_ID__c]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Referral_ID__c]"
+                          length="50"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Referral_ID__c]"
+                          name="Referral_ID__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[OwnerId]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[OwnerId]"
+                          length="18"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[OwnerId]"
+                          name="OwnerId"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[LastModifiedDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[LastModifiedDate]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[LastModifiedDate]"
+                          name="LastModifiedDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Created_Year__c]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Created_Year__c]"
+                          length="1300"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Created_Year__c]"
+                          name="Created_Year__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Owner_Status__c]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Owner_Status__c]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Owner_Status__c]"
+                          name="Owner_Status__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Specialty_Therapy__c]"
+                          dataType="bool"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Specialty_Therapy__c]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Specialty_Therapy__c]"
+                          name="Specialty_Therapy__c"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Referrals__c]"
+                          dataType="numeric"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Referrals__c]"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Referrals__c]"
+                          name="Referrals__c"
+                          precision="18"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Source_Account__c]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Source_Account__c]"
+                          length="254"
+                          lineageId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].Columns[Source_Account__c]"
+                          name="Source_Account__c"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Account__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="Account__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Case_Manager__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="Case_Manager__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[CPR_ID__c]"
+                          dataType="wstr"
+                          length="10"
+                          name="CPR_ID__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[CPR_Owner__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="CPR_Owner__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[CreatedById]"
+                          dataType="wstr"
+                          length="18"
+                          name="CreatedById" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[CreatedDate]"
+                          dataType="dbTimeStamp"
+                          name="CreatedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[EMR_System__c]"
+                          dataType="wstr"
+                          length="4000"
+                          name="EMR_System__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[HEMO_District__c]"
+                          dataType="wstr"
+                          length="1300"
+                          name="HEMO_District__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[HEMO_Territory__c]"
+                          dataType="wstr"
+                          length="1300"
+                          name="HEMO_Territory__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[HIT_District__c]"
+                          dataType="wstr"
+                          length="1300"
+                          name="HIT_District__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[HIT_Territory__c]"
+                          dataType="wstr"
+                          length="1300"
+                          name="HIT_Territory__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Id]"
+                          dataType="wstr"
+                          length="18"
+                          name="Id" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[IsDeleted]"
+                          dataType="bool"
+                          name="IsDeleted" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[IVC_District__c]"
+                          dataType="wstr"
+                          length="1300"
+                          name="IVC_District__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[IVC_Territory__c]"
+                          dataType="wstr"
+                          length="1300"
+                          name="IVC_Territory__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[LastActivityDate]"
+                          dataType="dbDate"
+                          name="LastActivityDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[LastModifiedById]"
+                          dataType="wstr"
+                          length="18"
+                          name="LastModifiedById" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[LastModifiedDate]"
+                          dataType="dbTimeStamp"
+                          name="LastModifiedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[LastReferencedDate]"
+                          dataType="dbTimeStamp"
+                          name="LastReferencedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[LastViewedDate]"
+                          dataType="dbTimeStamp"
+                          name="LastViewedDate" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Name]"
+                          dataType="wstr"
+                          length="80"
+                          name="Name" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[NewOrder__c]"
+                          dataType="bool"
+                          name="NewOrder__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[NextGen_ID__c]"
+                          dataType="wstr"
+                          length="50"
+                          name="NextGen_ID__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[NextGen_Sales_Level__c]"
+                          dataType="wstr"
+                          length="10"
+                          name="NextGen_Sales_Level__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Original_Sales_Rep__c]"
+                          dataType="wstr"
+                          length="50"
+                          name="Original_Sales_Rep__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[OwnerId]"
+                          dataType="wstr"
+                          length="18"
+                          name="OwnerId" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Paragon_Site__c]"
+                          dataType="wstr"
+                          length="4000"
+                          name="Paragon_Site__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Patient__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="Patient__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Prescriber__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="Prescriber__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Primary_Insurance__c]"
+                          dataType="wstr"
+                          length="80"
+                          name="Primary_Insurance__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Referral_Date__c]"
+                          dataType="dbDate"
+                          name="Referral_Date__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Referral_ID__c]"
+                          dataType="wstr"
+                          length="50"
+                          name="Referral_ID__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Sales_Rep_Hemo__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="Sales_Rep_Hemo__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Sales_Rep_HIT__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="Sales_Rep_HIT__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Sales_Rep_IVC__c]"
+                          dataType="wstr"
+                          length="18"
+                          name="Sales_Rep_IVC__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Secondary_Insurance__c]"
+                          dataType="wstr"
+                          length="80"
+                          name="Secondary_Insurance__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[SOC__c]"
+                          dataType="dbDate"
+                          name="SOC__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Status__c]"
+                          dataType="wstr"
+                          length="80"
+                          name="Status__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[SystemModstamp]"
+                          dataType="dbTimeStamp"
+                          name="SystemModstamp" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Therapy__c]"
+                          dataType="wstr"
+                          length="25"
+                          name="Therapy__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Created_Year__c]"
+                          dataType="wstr"
+                          length="1300"
+                          name="Created_Year__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Owner_Status__c]"
+                          dataType="bool"
+                          name="Owner_Status__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Specialty_Therapy__c]"
+                          dataType="bool"
+                          name="Specialty_Therapy__c" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Referrals__c]"
+                          dataType="numeric"
+                          name="Referrals__c"
+                          precision="18" />
+                        <externalMetadataColumn
+                          refId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output].ExternalColumns[Source_Account__c]"
+                          dataType="wstr"
+                          length="254"
+                          name="Source_Account__c" />
+                      </externalMetadataColumns>
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Sequence Container\SF Load for Referral.Paths[Data Conversion Output]"
+                  endId="Package\Sequence Container\SF Load for Referral\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  name="Data Conversion Output"
+                  startId="Package\Sequence Container\SF Load for Referral\Data Conversion.Outputs[Data Conversion Output]" />
+                <path
+                  refId="Package\Sequence Container\SF Load for Referral.Paths[Salesforce Source Output]"
+                  endId="Package\Sequence Container\SF Load for Referral\Data Conversion.Inputs[Data Conversion Input]"
+                  name="Salesforce Source Output"
+                  startId="Package\Sequence Container\SF Load for Referral\Salesforce Source.Outputs[Salesforce Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{B8D468C2-63D6-4B40-BAA8-43B4435C19E2}"
+          DTS:From="Package\Sequence Container\Execute SQL Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Sequence Container\SF Load for Referral" />
+      </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="sql12">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="163,42"
+          Id="Package\Sequence Container\Execute SQL Task"
+          TopLeft="10.5,5.5" />
+        <NodeLayout
+          Size="173,42"
+          Id="Package\Sequence Container\SF Load for Referral"
+          TopLeft="5.50000000000001,107.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container.PrecedenceConstraints[Constraint]"
+          TopLeft="92,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="184,205"
+          Size="184,248"
+          Id="Package\Sequence Container"
+          TopLeft="5.50000000000004,5.5" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Sequence Container\SF Load for Referral">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="242,42"
+          Id="Package\Sequence Container\SF Load for Referral\Salesforce Source"
+          TopLeft="5.50000000000001,5.5" />
+        <NodeLayout
+          Size="156,42"
+          Id="Package\Sequence Container\SF Load for Referral\Data Conversion"
+          TopLeft="48.5,107.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Sequence Container\SF Load for Referral\OLE DB Destination"
+          TopLeft="41,209.5" />
+        <EdgeLayout
+          Id="Package\Sequence Container\SF Load for Referral.Paths[Salesforce Source Output]"
+          TopLeft="126.5,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Sequence Container\SF Load for Referral.Paths[Data Conversion Output]"
+          TopLeft="126.5,149.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60"
+              Start="0,0"
+              End="0,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Sequence Container\SF Load for Referral\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

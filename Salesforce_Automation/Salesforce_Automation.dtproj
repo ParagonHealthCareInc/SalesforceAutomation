@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <DeploymentModel>Package</DeploymentModel>
+  <ProductVersion>15.0.2000.68</ProductVersion>
+  <SchemaVersion>9.0.1.0</SchemaVersion>
+  <State>$base64$PFNvdXJjZUNvbnRyb2xJbmZvIHhtbG5zOnhzZD0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEiIHhtbG5zOnhzaT0iaHR0cDovL3d3dy53My5vcmcvMjAwMS9YTUxTY2hlbWEtaW5zdGFuY2UiIHhtbG5zOmRkbDI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yIiB4bWxuczpkZGwyXzI9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDAzL2VuZ2luZS8yLzIiIHhtbG5zOmRkbDEwMF8xMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDA4L2VuZ2luZS8xMDAvMTAwIiB4bWxuczpkZGwyMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAiIHhtbG5zOmRkbDIwMF8yMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEwL2VuZ2luZS8yMDAvMjAwIiB4bWxuczpkZGwzMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAiIHhtbG5zOmRkbDMwMF8zMDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDExL2VuZ2luZS8zMDAvMzAwIiB4bWxuczpkZGw0MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAiIHhtbG5zOmRkbDQwMF80MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEyL2VuZ2luZS80MDAvNDAwIiB4bWxuczpkZGw1MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAiIHhtbG5zOmRkbDUwMF81MDA9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vYW5hbHlzaXNzZXJ2aWNlcy8yMDEzL2VuZ2luZS81MDAvNTAwIiB4bWxuczpkd2Q9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vRGF0YVdhcmVob3VzZS9EZXNpZ25lci8xLjAiPg0KICA8RW5hYmxlZD5mYWxzZTwvRW5hYmxlZD4NCiAgPFByb2plY3ROYW1lPjwvUHJvamVjdE5hbWU+DQogIDxBdXhQYXRoPjwvQXV4UGF0aD4NCiAgPExvY2FsUGF0aD48L0xvY2FsUGF0aD4NCiAgPFByb3ZpZGVyPjwvUHJvdmlkZXI+DQo8L1NvdXJjZUNvbnRyb2xJbmZvPg==</State>
+  <Database>
+    <Name>Salesforce_Automation.database</Name>
+    <FullPath>Salesforce_Automation.database</FullPath>
+  </Database>
+  <DataSources />
+  <DataSourceViews />
+  <DeploymentModelSpecificContent>
+    <Manifest>
+      <DTSPackages>
+        <DtsPackage FormatVersion="8">
+          <Name>AA.dtsx</Name>
+          <FullPath>AA.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Financials_CPR_PrevMonth from SVRReporting01.dtsx</Name>
+          <FullPath>Financials_CPR_PrevMonth from SVRReporting01.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Financials_CPR_PrevMonth.dtsx</Name>
+          <FullPath>Financials_CPR_PrevMonth.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Financials_NextGen_PrevMonth.dtsx</Name>
+          <FullPath>Financials_NextGen_PrevMonth.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Hemo_Shipment_Tasks_3Day.dtsx</Name>
+          <FullPath>Hemo_Shipment_Tasks_3Day.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Hemo_Shipment_Tasks_5Day.dtsx</Name>
+          <FullPath>Hemo_Shipment_Tasks_5Day.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Insert_LoginHistory.dtsx</Name>
+          <FullPath>Insert_LoginHistory.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Insert_LoginHistory2.dtsx</Name>
+          <FullPath>Insert_LoginHistory2.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_CPR_30Min.dtsx</Name>
+          <FullPath>Patients_CPR_30Min.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_CPR_PrevDay.dtsx</Name>
+          <FullPath>Patients_CPR_PrevDay.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_CPR_PrevMonth.dtsx</Name>
+          <FullPath>Patients_CPR_PrevMonth.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_CPR_Update.dtsx</Name>
+          <FullPath>Patients_CPR_Update.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_CPR_Weekly.dtsx</Name>
+          <FullPath>Patients_CPR_Weekly.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_Hemo_CPR_PrevDay.dtsx</Name>
+          <FullPath>Patients_Hemo_CPR_PrevDay.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_NextGen_30Min.dtsx</Name>
+          <FullPath>Patients_NextGen_30Min.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_NextGen_PrevDay.dtsx</Name>
+          <FullPath>Patients_NextGen_PrevDay.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_NextGen_Update.dtsx</Name>
+          <FullPath>Patients_NextGen_Update.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Patients_NextGen_Weekly.dtsx</Name>
+          <FullPath>Patients_NextGen_Weekly.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_30Min.dtsx</Name>
+          <FullPath>Prescribers_CPR_30Min.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_30Min__PV.dtsx</Name>
+          <FullPath>Prescribers_CPR_30Min__PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_PrevDay.dtsx</Name>
+          <FullPath>Prescribers_CPR_PrevDay.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_PrevDay__PV.dtsx</Name>
+          <FullPath>Prescribers_CPR_PrevDay__PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_PrevMonth.dtsx</Name>
+          <FullPath>Prescribers_CPR_PrevMonth.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_Update.dtsx</Name>
+          <FullPath>Prescribers_CPR_Update.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_Weekly.dtsx</Name>
+          <FullPath>Prescribers_CPR_Weekly.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_CPR_Weekly_PV.dtsx</Name>
+          <FullPath>Prescribers_CPR_Weekly_PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_NextGen_30Min.dtsx</Name>
+          <FullPath>Prescribers_NextGen_30Min.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_NextGen_30Min__PV.dtsx</Name>
+          <FullPath>Prescribers_NextGen_30Min__PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_NextGen_PrevDay.dtsx</Name>
+          <FullPath>Prescribers_NextGen_PrevDay.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_NextGen_PrevDay__PV.dtsx</Name>
+          <FullPath>Prescribers_NextGen_PrevDay__PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_NextGen_Update.dtsx</Name>
+          <FullPath>Prescribers_NextGen_Update.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_NextGen_Weekly.dtsx</Name>
+          <FullPath>Prescribers_NextGen_Weekly.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Prescribers_NextGen_Weekly__PV.dtsx</Name>
+          <FullPath>Prescribers_NextGen_Weekly__PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_CPR_2Hrs.dtsx</Name>
+          <FullPath>Referral_CPR_2Hrs.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_CPR_30Min_PV.dtsx</Name>
+          <FullPath>Referral_CPR_30Min_PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_CPR_PrevDay.dtsx</Name>
+          <FullPath>Referral_CPR_PrevDay.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_CPR_PrevDay_PV.dtsx</Name>
+          <FullPath>Referral_CPR_PrevDay_PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_CPR_PrevMonth.dtsx</Name>
+          <FullPath>Referral_CPR_PrevMonth.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_NextGen_PrevDay.dtsx</Name>
+          <FullPath>Referral_NextGen_PrevDay.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_NextGen_PrevDay_PV.dtsx</Name>
+          <FullPath>Referral_NextGen_PrevDay_PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_NextGen_Update.dtsx</Name>
+          <FullPath>Referral_NextGen_Update.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_NextGen_Weekly.dtsx</Name>
+          <FullPath>Referral_NextGen_Weekly.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referral_NextGen_Weekly_PV.dtsx</Name>
+          <FullPath>Referral_NextGen_Weekly_PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referrals_CPR_Update.dtsx</Name>
+          <FullPath>Referrals_CPR_Update.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referrals_CPR_Weekly.dtsx</Name>
+          <FullPath>Referrals_CPR_Weekly.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referrals_CPR_Weekly_PV.dtsx</Name>
+          <FullPath>Referrals_CPR_Weekly_PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referrals_NextGen_2Hrs.dtsx</Name>
+          <FullPath>Referrals_NextGen_2Hrs.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referrals_NextGen_2Hrs_test.dtsx</Name>
+          <FullPath>Referrals_NextGen_2Hrs_test.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referrals_NextGen_30Min_PV.dtsx</Name>
+          <FullPath>Referrals_NextGen_30Min_PV.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Referrals_NextGen_Adhoc.dtsx</Name>
+          <FullPath>Referrals_NextGen_Adhoc.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Accounts.dtsx</Name>
+          <FullPath>Salesforce_Accounts.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Contacts.dtsx</Name>
+          <FullPath>Salesforce_Contacts.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Owner.dtsx</Name>
+          <FullPath>Salesforce_Owner.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Owner_Full.dtsx</Name>
+          <FullPath>Salesforce_Owner_Full.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Prescribers.dtsx</Name>
+          <FullPath>Salesforce_Prescribers.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Prescribers_Full.dtsx</Name>
+          <FullPath>Salesforce_Prescribers_Full.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_RecordType.dtsx</Name>
+          <FullPath>Salesforce_RecordType.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Referrals.dtsx</Name>
+          <FullPath>Salesforce_Referrals.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_Tasks.dtsx</Name>
+          <FullPath>Salesforce_Tasks.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_VGM_Facilities__c.dtsx</Name>
+          <FullPath>Salesforce_VGM_Facilities__c.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_VGM_Practitioners__C.dtsx</Name>
+          <FullPath>Salesforce_VGM_Practitioners__C.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_VGM_Practitioners_Disqualify.dtsx</Name>
+          <FullPath>Salesforce_VGM_Practitioners_Disqualify.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>Salesforce_VGM_Practitioners_Upload.dtsx</Name>
+          <FullPath>Salesforce_VGM_Practitioners_Upload.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="-1">
+          <Name>SF_ExportAllAccountsPrescribers.dtsx</Name>
+          <FullPath>SF_ExportAllAccountsPrescribers.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="-1">
+          <Name>SF_MatchAccount_SFDC_ID.dtsx</Name>
+          <FullPath>SF_MatchAccount_SFDC_ID.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>SF_Prescribers.dtsx</Name>
+          <FullPath>SF_Prescribers.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="-1">
+          <Name>SF_Prescribers_Srikanth.dtsx</Name>
+          <FullPath>SF_Prescribers_Srikanth.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>SF_Referrals.dtsx</Name>
+          <FullPath>SF_Referrals.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="-1">
+          <Name>SF_Test.dtsx</Name>
+          <FullPath>SF_Test.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+        <DtsPackage FormatVersion="8">
+          <Name>SF_Users.dtsx</Name>
+          <FullPath>SF_Users.dtsx</FullPath>
+          <References />
+        </DtsPackage>
+      </DTSPackages>
+    </Manifest>
+  </DeploymentModelSpecificContent>
+  <ControlFlowParts />
+  <Miscellaneous />
+  <Configurations>
+    <Configuration>
+      <Name>Development</Name>
+      <Options>
+        <OutputPath>bin</OutputPath>
+        <ConnectionMappings />
+        <ConnectionProviderMappings />
+        <ConnectionSecurityMappings />
+        <DatabaseStorageLocations />
+        <TargetServerVersion>SQLServer2014</TargetServerVersion>
+        <AzureMode>false</AzureMode>
+        <LinkedAzureTenantId />
+        <LinkedAzureAccountId />
+        <LinkedAzureSSISIR />
+        <LinkedAzureStorage />
+        <RemoteExecutionFolder />
+        <ParameterConfigurationValues />
+      </Options>
+    </Configuration>
+  </Configurations>
+</Project>
